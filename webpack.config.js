@@ -29,6 +29,14 @@ const baseConfig = {
                 'sass-loader'
               ]
             },
+            {
+              test: /\.(ttf|woff|woff2|eot)$/,
+              use: ['file-loader']
+            },
+            {
+              test: /\.(png|jpg|svg)$/,
+              use: ['file-loader']
+            },
         ],
     },
     resolve: {
