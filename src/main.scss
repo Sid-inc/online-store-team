@@ -1,0 +1,30 @@
+@import "~normalize.css";
+@import "assets/styles/vendors/vendors";
+@import "assets/styles/components/components";
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+}
+
+.container {
+  width: 1160px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1320px) {
+    width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
