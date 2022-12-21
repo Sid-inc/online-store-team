@@ -54,7 +54,13 @@ export class Main {
       classes: ['sort__item'],
       atributesAndValues: [['value', 'pasc']],
       text: 'Price asc',
-    }) as HTMLInputElement;
+    });
+    const optionPdsc = createNode({
+      tag: 'option',
+      classes: ['sort__item'],
+      atributesAndValues: [['value', 'pdsc']],
+      text: 'Price dsc',
+    });
     const optionRasc = createNode({
       tag: 'option',
       classes: ['sort__item'],
@@ -67,7 +73,7 @@ export class Main {
       atributesAndValues: [['value', 'rdsc']],
       text: 'Rating dsc',
     });
-    sort.append(optionPasc, optionRasc, optionRdsc, optionRdsc);
+    sort.append(optionPasc, optionPdsc, optionRasc, optionRdsc);
 
     const filtersCategory = createNode({ tag: 'fieldset', classes: ['filters__category', 'categories'], parent: form });
     createNode({
