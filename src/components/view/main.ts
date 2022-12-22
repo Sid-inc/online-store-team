@@ -3,11 +3,15 @@ import { books } from '../constants/books';
 import { countKeys } from '../utils/countDescription';
 import { createNode } from '../utils/createNode';
 import { Card } from './card';
+import { Search } from './search';
 
 export class Main {
   products: Book[];
+  search: Search;
+
   constructor(products: Book[]) {
     this.products = products;
+    this.search = new Search();
   }
   draw() {
     const main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
@@ -28,25 +32,7 @@ export class Main {
   drawCatalogFilters() {
     const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
     const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
-    const search = createNode({ tag: 'div', classes: ['filters__search', 'search'], parent: form });
-    const searchInput = createNode({
-      tag: 'input',
-      classes: ['search__field'],
-      atributesAndValues: [
-        ['type', 'text'],
-        ['placeholder', 'Search'],
-      ],
-    });
-    const searchButton = createNode({
-      tag: 'button',
-      classes: ['search__action'],
-      atributesAndValues: [
-        ['type', 'button'],
-        ['aria-label', 'clean'],
-      ],
-    });
-    const searchText = createNode({ tag: 'span', classes: ['search__text'], text: '0 products found' });
-    search.append(searchInput, searchButton, searchText);
+    form.append(this.search.drow());
 
     const sort = createNode({ tag: 'select', classes: ['filters__sort', 'sort'], parent: form });
     const optionPasc = createNode({
