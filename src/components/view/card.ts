@@ -39,7 +39,12 @@ export class Card {
       classes: ['product__price'],
       text: `$${this.product.price.toFixed(2)}`,
     });
-    productDesc.append(productTitle, productAuthor, productRaiting, productPrice);
+    const productAmount = createNode({
+      tag: 'span',
+      classes: ['product__price'],
+      text: `Amount in shop: ${this.product.amount}`,
+    });
+    productDesc.append(productTitle, productAuthor, productRaiting, productPrice, productAmount);
     const productButton = createNode({
       tag: 'button',
       classes: ['product__action'],

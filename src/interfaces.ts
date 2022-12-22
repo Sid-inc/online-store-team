@@ -16,3 +16,14 @@ export interface Book {
   description: string;
   amount: number;
 }
+
+export interface SettingsForSort {
+  searchValue: string;
+  filtersSort: string;
+  categorySort: string[];
+  authorSort: string[];
+  priceRangeMin: number;
+  priceRangeMax: number;
+  countRangeMin: number;
+  countRangeMax: number;
+}

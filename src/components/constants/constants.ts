@@ -1,4 +1,5 @@
-import { Book, Cover } from '../../interfaces';
+import { Book, Cover, SettingsForSort } from '../../interfaces';
+import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 
 export const books: Book[] = [
   {
@@ -53,7 +54,7 @@ export const books: Book[] = [
     cover: Cover.HARDCOVER,
     description:
       "First published in the summer of 1949, George Orwell's 1984 is one of the most definitive texts of modern literature. This delectable leather-bound edition, beautifully crafted and elegantly designed, comes with a ribbon bookmark, gilded edges, and beautiful endpapers. Set in Oceania, one of the three inter-continental superstate that divided the world among themselves after a global war, Orwell's masterful critique of the political structures of the time works itself out through the story of Winston Smith, a man caught in the webs of a dystopian future, and his clandestine love affair with Julia, a young woman he meets during the course of his work for the government. As much as it is an entertaining read, 1984 is also a brilliant, and more importantly, a timeless satirical attack on the social and political structures of the world.",
-    amount: 0,
+    amount: 200,
   },
   {
     category: 'adventure',
@@ -150,13 +151,13 @@ export const books: Book[] = [
     id: 9,
     title: 'Gullivers Travels',
     author: 'Jonathan Swift',
-    price: 0,
+    price: 446,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81OGJ-a3xCS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/814vO0KuDlS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81jAOE4CvIS.jpg',
     ],
-    rating: 0,
+    rating: 4.4,
     isBestSeller: true,
     cover: Cover.HARDCOVER,
     description:
@@ -215,14 +216,14 @@ export const books: Book[] = [
     cover: Cover.HARDCOVER,
     description:
       '“The soul is a terrible reality. It can be bought and sold and bartered away.” Meet Dorian Gray, the beautiful young man with an impossibly charming face and spirit. As he sits for Basil Hallward—a deeply moral artist and a friend of the impish Lord Henry—who becomes obsessed with his beauty and wants to paint him, Dorian is enchanted by the perfection of his portrait. But, influenced by the well-phrased epigrams of the hedonist Lord Henry on the transience of youth and beauty, Dorian becomes jealous of it and wishes that the portrait bear the scars of his passing youth and age, while he would remain young forever. And alas, his wish comes true! Enticed into dissolution and degradation while his portrait is aging in the attic, Dorian engages in scandals and sinful pleasures. We see him go from good to evil. But is he any happier? This is a hardbound deluxe edition of the only novel written by Oscar Wilde, The Picture of Dorian Gray is an arresting moral commentary and a classic example of Gothic fiction. With an unparalleled depiction of the Faustian bargain, this parable of aesthetic ideal remains a literary masterpiece almost 125 years after its publication.',
-    amount: 0,
+    amount: 10,
   },
   {
     category: 'classic',
     id: 13,
     title: 'The Great Gatsby',
     author: 'F. Scott Fitzgerald',
-    price: 0,
+    price: 325,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71sJRMkeBNS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KHq5cLaGL.jpg',
@@ -377,7 +378,7 @@ export const books: Book[] = [
     cover: Cover.PAPERBACK,
     description:
       'One day, when Tom canty, a London pauper, and Edward Tudor, the prince of Wales, come across each other, they discover that they don’t just look alike but are also the same age. As each is fascinated by the other life, The prince and the pauper decide to exchange roles. “A few minutes later the little prince of Wales was garlanded with Tom’s fluttering odds and ends, and the little prince of pauperdom was tricked out in the gaudy plumage of royalty. The two went and stood side by side before a great mirror, and Lo, a miracle: there did not seem to have been any change made!” what happens when the king dies and the prince has to take over the throne? A classic satire on the social conventions and injustices, the prince and the pauper is a timeless comedy of mistaken identities. It has been adapted for stage, Comics, films, and television time and again.',
-    amount: 0,
+    amount: 13,
   },
   {
     category: 'children',
@@ -812,3 +813,16 @@ export const books: Book[] = [
     amount: 17,
   },
 ];
+
+export const settingsForSort: SettingsForSort = {
+  searchValue: '',
+  filtersSort: 'Price asc',
+  categorySort: [],
+  authorSort: [],
+  priceRangeMin: minPrice(books),
+  priceRangeMax: maxPrice(books),
+  countRangeMin: minAmount(books),
+  countRangeMax: maxAmount(books),
+};
+
+console.log(settingsForSort.priceRangeMax, settingsForSort.priceRangeMin);

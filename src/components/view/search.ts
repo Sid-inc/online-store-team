@@ -1,4 +1,3 @@
-// import { books } from '../constants/books';
 import { createNode } from '../utils/createNode';
 
 export class Search {

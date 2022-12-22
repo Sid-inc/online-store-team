@@ -1,19 +1,23 @@
 import { Book } from '../../interfaces';
-import { books } from '../constants/books';
+import { books } from '../constants/constants';
 import { countKeys } from '../utils/countDescription';
 import { createNode } from '../utils/createNode';
+import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 import { Card } from './card';
 import { Search } from './search';
 
 export class Main {
   products: Book[];
   search: Search;
-
+  prop = 2;
   constructor(products: Book[]) {
     this.products = products;
     this.search = new Search();
+    // this.prop = 2;
   }
+
   draw() {
+    this.prop = 1;
     const main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
     const catalogContainer = createNode({ tag: 'div', classes: ['catalog__inner', 'container'], parent: main });
     catalogContainer.append(this.drawCatalogFilters(), this.drawCatalogList());
@@ -132,16 +136,26 @@ export class Main {
       parent: rangePrice,
     });
     const rangePriceValues = createNode({ tag: 'span', classes: ['range__values'], parent: rangePrice });
-    createNode({ tag: 'span', classes: ['range__min'], text: '0', parent: rangePriceValues });
-    createNode({ tag: 'span', classes: ['range__max'], text: '100', parent: rangePriceValues });
+    createNode({
+      tag: 'span',
+      classes: ['range__min'],
+      text: `$${minPrice(books).toFixed(2)}`,
+      parent: rangePriceValues,
+    });
+    createNode({
+      tag: 'span',
+      classes: ['range__max'],
+      text: `$${maxPrice(books).toFixed(2)}`,
+      parent: rangePriceValues,
+    });
 
-    const rangeCount = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
+    const rangeAmount = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
     createNode({
       tag: 'label',
       classes: ['range__title'],
       atributesAndValues: [['for', 'count']],
-      text: 'Count range',
-      parent: rangeCount,
+      text: 'Amount in shop range',
+      parent: rangeAmount,
     });
     createNode({
       tag: 'input',
@@ -150,11 +164,11 @@ export class Main {
         ['id', 'count'],
         ['type', 'range'],
       ],
-      parent: rangeCount,
+      parent: rangeAmount,
     });
-    const rangeCountValues = createNode({ tag: 'span', classes: ['range__values'], parent: rangeCount });
-    createNode({ tag: 'span', classes: ['range__min'], text: '0', parent: rangeCountValues });
-    createNode({ tag: 'span', classes: ['range__max'], text: '100', parent: rangeCountValues });
+    const rangeAmountValues = createNode({ tag: 'span', classes: ['range__values'], parent: rangeAmount });
+    createNode({ tag: 'span', classes: ['range__min'], text: minAmount(books).toString(), parent: rangeAmountValues });
+    createNode({ tag: 'span', classes: ['range__max'], text: maxAmount(books).toString(), parent: rangeAmountValues });
 
     const filtersFooter = createNode({ tag: 'footer', classes: ['filters__footer'], parent: form });
     createNode({
@@ -181,6 +195,11 @@ export class Main {
       const card = new Card(product);
       catalogList.append(card.getCardElement());
     });
+    console.log(catalogList);
     return catalogList;
+  }
+  clear() {
+    const main = document.querySelector('#shop') as HTMLElement;
+    main.innerHTML = '';
   }
 }
