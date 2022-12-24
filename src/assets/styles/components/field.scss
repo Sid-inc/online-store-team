@@ -1,0 +1,19 @@
+.field {
+  display: block;
+  height: 40px;
+  padding: 8px;
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 0 0 1px #ddd;
+  outline-offset: 3px;
+  transition: background-color .3s ease;
+
+  &::placeholder {
+    color: #ccc;
+  }
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+}

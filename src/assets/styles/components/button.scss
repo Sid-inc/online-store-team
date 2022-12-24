@@ -34,3 +34,23 @@
     background-color: #333;
   }
 }
+
+.button--small {
+  line-height: 16px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 4px;
+}
+
+.button--delete {
+  box-shadow: none;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  background-image: url('assets/images/trash.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
