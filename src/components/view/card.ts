@@ -42,7 +42,7 @@ export class Card {
     const productAmount = createNode({
       tag: 'span',
       classes: ['product__price'],
-      text: `Amount in shop: ${this.product.amount}`,
+      text: `Amount of books in the store: ${this.product.amount}`,
     });
     productDesc.append(productTitle, productAuthor, productRaiting, productPrice, productAmount);
     const productButton = createNode({

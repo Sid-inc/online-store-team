@@ -1,23 +1,31 @@
 import { Book } from '../../interfaces';
 import { books } from '../constants/constants';
-import { countKeys } from '../utils/countDescription';
+// import { countKeys } from '../utils/countDescription';
 import { createNode } from '../utils/createNode';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 import { Card } from './card';
+import { FilterList } from './filetrList';
 import { Search } from './search';
+import { Sort } from './sort';
 
 export class Main {
   products: Book[];
   search: Search;
-  prop = 2;
+  sort: Sort;
+  filterListByCategories: FilterList;
+  filterListByAuthors: FilterList;
+  // filterListByCategories: FilterList;
   constructor(products: Book[]) {
     this.products = products;
     this.search = new Search();
+    this.sort = new Sort();
+    this.filterListByCategories = new FilterList(books, 'category');
+    this.filterListByAuthors = new FilterList(books, 'author');
+    // this.filterListByCategories = new FileList(books);
     // this.prop = 2;
   }
 
   draw() {
-    this.prop = 1;
     const main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
     const catalogContainer = createNode({ tag: 'div', classes: ['catalog__inner', 'container'], parent: main });
     catalogContainer.append(this.drawCatalogFilters(), this.drawCatalogList());
@@ -36,86 +44,12 @@ export class Main {
   drawCatalogFilters() {
     const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
     const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
-    form.append(this.search.drow());
-
-    const sort = createNode({ tag: 'select', classes: ['filters__sort', 'sort'], parent: form });
-    const optionPasc = createNode({
-      tag: 'option',
-      classes: ['sort__item'],
-      atributesAndValues: [['value', 'pasc']],
-      text: 'Price asc',
-    });
-    const optionPdsc = createNode({
-      tag: 'option',
-      classes: ['sort__item'],
-      atributesAndValues: [['value', 'pdsc']],
-      text: 'Price dsc',
-    });
-    const optionRasc = createNode({
-      tag: 'option',
-      classes: ['sort__item'],
-      atributesAndValues: [['value', 'rasc']],
-      text: 'Rating asc',
-    });
-    const optionRdsc = createNode({
-      tag: 'option',
-      classes: ['sort__item'],
-      atributesAndValues: [['value', 'rdsc']],
-      text: 'Rating dsc',
-    });
-    sort.append(optionPasc, optionPdsc, optionRasc, optionRdsc);
-
-    const filtersCategory = createNode({ tag: 'fieldset', classes: ['filters__category', 'categories'], parent: form });
-    createNode({
-      tag: 'legend',
-      classes: ['categories__title'],
-      text: 'Category',
-      parent: filtersCategory,
-    });
-    const categoriesList = createNode({
-      tag: 'ul',
-      classes: ['categories__list', 'categories-list'],
-      parent: filtersCategory,
-    });
-    const arrCategories: [string, number][] = Object.entries(countKeys(books, 'category')).sort((a, b) => b[1] - a[1]);
-    arrCategories.forEach((category) => {
-      const li = createNode({ tag: 'li', classes: ['categories-list__item', 'categories-item'] });
-      const button = createNode({
-        tag: 'button',
-        classes: ['categories-item__action', 'categories-item__action--disabled'],
-        atributesAndValues: [['type', 'button']],
-        parent: li,
-      });
-      createNode({ tag: 'span', classes: ['categories-item__name'], text: category[0], parent: button });
-      createNode({ tag: 'span', classes: ['categories-item__count'], text: `(${category[1]})`, parent: button });
-      categoriesList.append(li);
-    });
-
-    const filtersAuthors = createNode({ tag: 'fieldset', classes: ['filters__author', 'categories'], parent: form });
-    createNode({
-      tag: 'legend',
-      classes: ['categories__title'],
-      text: 'Author',
-      parent: filtersAuthors,
-    });
-    const authorsList = createNode({
-      tag: 'ul',
-      classes: ['categories__list', 'categories-list'],
-      parent: filtersAuthors,
-    });
-    const arrAuthors: [string, number][] = Object.entries(countKeys(books, 'author')).sort((a, b) => b[1] - a[1]);
-    arrAuthors.forEach((category) => {
-      const li = createNode({ tag: 'li', classes: ['categories-list__item', 'categories-item'] });
-      const button = createNode({
-        tag: 'button',
-        classes: ['categories-item__action', 'categories-item__action--disabled'],
-        atributesAndValues: [['type', 'button']],
-        parent: li,
-      });
-      createNode({ tag: 'span', classes: ['categories-item__name'], text: category[0], parent: button });
-      createNode({ tag: 'span', classes: ['categories-item__count'], text: `(${category[1]})`, parent: button });
-      authorsList.append(li);
-    });
+    form.append(
+      this.search.drow(),
+      this.sort.drow(),
+      this.filterListByCategories.drow(),
+      this.filterListByAuthors.drow()
+    );
 
     const filtersRanges = createNode({ tag: 'fieldset', classes: ['filters__ranges'], parent: form });
     const rangePrice = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });

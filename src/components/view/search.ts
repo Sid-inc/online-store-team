@@ -1,3 +1,4 @@
+import { settingsForSort } from '../constants/constants';
 import { createNode } from '../utils/createNode';
 
 export class Search {
@@ -10,7 +11,7 @@ export class Search {
         ['type', 'text'],
         ['placeholder', 'Search'],
       ],
-    });
+    }) as HTMLInputElement;
     const searchButton = createNode({
       tag: 'button',
       classes: ['search__action'],
@@ -21,6 +22,14 @@ export class Search {
     });
     const searchText = createNode({ tag: 'span', classes: ['search__text'], text: '0 products found' });
     search.append(searchInput, searchButton, searchText);
+    searchInput.addEventListener('input', () => {
+      settingsForSort.searchValue = searchInput.value;
+      console.log(settingsForSort);
+    });
     return search;
   }
+
+  // sort(input: HTMLInputElement, arr: Book[]): Book[] {
+  //   return getBooksForCreateCatalog(input, arr);
+  // }
 }
