@@ -1,7 +1,14 @@
-import { settingsForSort } from '../constants/constants';
+// import { settingsForSort } from '../constants/constants';
+import { ChangeHandler } from '../../interfaces';
 import { createNode } from '../utils/createNode';
+// import { getBooks } from '../utils/sort';
 
 export class Search {
+  changeHandler: ChangeHandler;
+  constructor(changeHandler: ChangeHandler) {
+    this.changeHandler = changeHandler;
+  }
+
   drow() {
     const search = createNode({ tag: 'div', classes: ['filters__search', 'search'] });
     const searchInput = createNode({
@@ -20,16 +27,16 @@ export class Search {
         ['aria-label', 'clean'],
       ],
     });
+
     const searchText = createNode({ tag: 'span', classes: ['search__text'], text: '0 products found' });
     search.append(searchInput, searchButton, searchText);
     searchInput.addEventListener('input', () => {
-      settingsForSort.searchValue = searchInput.value;
-      console.log(settingsForSort);
+      this.changeHandler('setSearchValue', searchInput.value);
+    });
+    searchButton.addEventListener('click', () => {
+      searchInput.value = '';
+      this.changeHandler('setSearchValue', '');
     });
     return search;
   }
-
-  // sort(input: HTMLInputElement, arr: Book[]): Book[] {
-  //   return getBooksForCreateCatalog(input, arr);
-  // }
 }

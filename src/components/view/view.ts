@@ -1,8 +1,16 @@
-import { books } from '../constants/constants';
+import { ChangeHandler } from '../../interfaces';
+import { books, settingsForSort } from '../constants/constants';
+import { getSortValue, searchBooks } from '../utils/sort';
 import { Footer } from './footer';
 import { Header } from './header';
 import { Main } from './main';
+function getBooks() {
+  const booksBySearch = searchBooks(books, settingsForSort);
+  getSortValue(booksBySearch, settingsForSort);
+  console.log(booksBySearch);
 
+  return booksBySearch;
+}
 export class View {
   header: Header;
   footer: Footer;
@@ -10,19 +18,28 @@ export class View {
   constructor() {
     this.header = new Header();
     this.footer = new Footer();
-    this.main = new Main(books); // передаю хэндлер
+    this.main = new Main(this.changeHandler);
   }
 
   drawApp() {
     this.header.draw();
-    //const booksArr = getBooks(books) - функция со всеми сортировками
-    this.main.draw(); //передать booksArr
+    const booksForDrow = getBooks();
+    this.main.draw(booksForDrow);
     this.footer.draw();
   }
-  // searchHandler = (e) => {
-  //   const searchBoks = searchProducts(input, books);
-  //   const main = new Main(searchBoks);
-  //   main.clear();
-  //   main.draw();
-  // }
+  changeHandler: ChangeHandler = (action, value) => {
+    console.log(action, value);
+    switch (action) {
+      case 'setSearchValue':
+        settingsForSort.searchValue = value;
+        break;
+      case 'addFiltersSort':
+        settingsForSort.filtersSort = value;
+        break;
+      default:
+        break;
+    }
+    const booksForDrow = getBooks();
+    this.main.drawCatalogList(booksForDrow);
+  };
 }

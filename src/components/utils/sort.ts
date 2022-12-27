@@ -1,37 +1,71 @@
-// import { Book } from '../../interfaces';
-import { settingsForSort } from '../constants/constants';
-// import { books } from '../constants/constants';
+import { Book, SettingsForSort } from '../../interfaces';
 
-// function searchBooks(input: HTMLInputElement, arr: Book[]) {
-//   const val: string = input.value.trimStart().toUpperCase();
-//   const searchBooks: Book[] = [];
+export function searchBooks(arr: Book[], setting: SettingsForSort) {
+  const val: string = setting.searchValue.toUpperCase();
+  console.log(val);
 
-//   if (val == '') {
-//     return arr;
-//   } else {
-//     arr.forEach((element: Book) => {
-//       if (
-//         element.amount.toString().toUpperCase().search(val) !== -1 ||
-//         element.author.toUpperCase().search(val) !== -1 ||
-//         element.category.toUpperCase().search(val) !== -1 ||
-//         element.price.toString().toUpperCase().search(val) !== -1 ||
-//         element.title.toUpperCase().search(val) !== -1
-//       ) {
-//         searchBooks.push(element);
-//       }
-//     });
-//   }
-//   // console.log(searchBooks);
-//   return searchBooks;
-// }
-
-export function getSortValue(select: HTMLSelectElement) {
-  const value: string = select.value;
-  settingsForSort.filtersSort = value;
+  if (val === '') {
+    return arr;
+  } else {
+    return arr.filter((element) => {
+      return (
+        element.amount.toString().toUpperCase().includes(val) ||
+        element.author.toUpperCase().includes(val) ||
+        element.category.toUpperCase().includes(val) ||
+        element.price.toString().toUpperCase().includes(val) ||
+        element.title.toUpperCase().includes(val)
+      );
+    });
+  }
 }
 
-// export function getBooksForCreateCatalog(input: HTMLInputElement, section: HTMLSelectElement, arr: Book[]) {
-//   searchBooks(input, arr);
-//   // sortAscendingOrDescending(section, arr);
-//   return arr;
+export function getSortValue(arr: Book[], setting: SettingsForSort) {
+  const value = setting.filtersSort;
+  console.log(`value - ${value}`);
+
+  switch (value) {
+    case 'pasc':
+      return arr.sort((a, b) => a.price - b.price);
+    case 'pdsc':
+      return arr.sort((a, b) => b.price - a.price);
+    case 'rasc':
+      return arr.sort((a, b) => a.rating - b.rating);
+    case 'rdsc':
+      return arr.sort((a, b) => b.rating - a.rating);
+  }
+}
+
+function filterByAythor(arr: Book[], setting: SettingsForSort) {
+  if (setting.authorSort.length === 0) {
+    return arr;
+  } else {
+    return arr.filter((book) => setting.authorSort.includes(book.author));
+    // const sortArr: Book[] = setting.authorSort.reduce((acc: Book[], author) => {
+    //   for (let i = 0; i < arr.length; i++) {
+    //     if (author === arr[i].author) {
+    //       const book: Book = arr[i];
+    //       acc.push(book);
+    //     }
+    //   }
+    //   return acc;
+    // }, []);
+    // return sortArr;
+  }
+}
+// function filterByCategory(arr: Book[], setting: SettingsForSort) {
+//   if (setting.categorySort.length === 0) {
+//     return arr;
+//   } else {
+//     const arrSort = arr.filter((el: Book) => setting.categorySort.includes(el.category));
+//     return arrSort;
+//   }
 // }
+
+export function getBooks(arr: Book[], setting: SettingsForSort) {
+  const sortArr: Book[] = searchBooks(arr, setting);
+  getSortValue(sortArr, setting);
+  // filterByCategory(arr, setting);
+  filterByAythor(arr, setting);
+  console.log(sortArr);
+  return sortArr;
+}

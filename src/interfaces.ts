@@ -27,3 +27,5 @@ export interface SettingsForSort {
   countRangeMin: number;
   countRangeMax: number;
 }
+
+export type ChangeHandler = (action: string, value: string) => void;

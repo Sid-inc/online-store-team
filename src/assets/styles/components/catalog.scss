@@ -140,10 +140,14 @@
 }
 
 .categories__title {
+  display: inline-block;
   font-size: 18px;
   font-weight: 600;
   margin-left: 8px;
   margin-bottom: 4px;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .categories-list {
@@ -175,7 +179,6 @@
 
 .categories-item__action--disabled {
   color: #B3B3B3;
-  pointer-events: none;
 }
 
 .categories-item__action--active {

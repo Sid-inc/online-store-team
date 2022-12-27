@@ -1,7 +1,11 @@
-import { settingsForSort } from '../constants/constants';
+import { ChangeHandler } from '../../interfaces';
 import { createNode } from '../utils/createNode';
 
 export class Sort {
+  changeHandler: ChangeHandler;
+  constructor(changeHandler: ChangeHandler) {
+    this.changeHandler = changeHandler;
+  }
   drow() {
     const sort = createNode({ tag: 'select', classes: ['filters__sort', 'sort'] }) as HTMLSelectElement;
     const optionPasc = createNode({
@@ -30,8 +34,7 @@ export class Sort {
     });
     sort.append(optionPasc, optionPdsc, optionRasc, optionRdsc);
     sort.addEventListener('change', () => {
-      settingsForSort.filtersSort = sort.value;
-      console.log(settingsForSort);
+      this.changeHandler('addFiltersSort', sort.value);
     });
     return sort;
   }

@@ -1,34 +1,31 @@
-import { Book } from '../../interfaces';
+import { Book, ChangeHandler } from '../../interfaces';
 import { books } from '../constants/constants';
 // import { countKeys } from '../utils/countDescription';
 import { createNode } from '../utils/createNode';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 import { Card } from './card';
-import { FilterList } from './filetrList';
+import { FilterList } from './filterList';
 import { Search } from './search';
 import { Sort } from './sort';
 
 export class Main {
-  products: Book[];
-  search: Search;
-  sort: Sort;
+  catalogList: HTMLElement | null = null;
+  catalogContainer: HTMLElement | null = null;
   filterListByCategories: FilterList;
   filterListByAuthors: FilterList;
-  // filterListByCategories: FilterList;
-  constructor(products: Book[]) {
-    this.products = products;
-    this.search = new Search();
-    this.sort = new Sort();
+  changeHandler: ChangeHandler;
+  constructor(changeHandler: ChangeHandler) {
+    this.changeHandler = changeHandler;
     this.filterListByCategories = new FilterList(books, 'category');
     this.filterListByAuthors = new FilterList(books, 'author');
-    // this.filterListByCategories = new FileList(books);
-    // this.prop = 2;
   }
 
-  draw() {
+  draw(products: Book[]) {
     const main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
-    const catalogContainer = createNode({ tag: 'div', classes: ['catalog__inner', 'container'], parent: main });
-    catalogContainer.append(this.drawCatalogFilters(), this.drawCatalogList());
+    this.catalogContainer = createNode({ tag: 'div', classes: ['catalog__inner', 'container'], parent: main });
+    this.catalogContainer.append(this.drawCatalogFilters());
+    this.drawCatalogList(products);
+
     document.body.append(main);
     const promo = createNode({ tag: 'div', classes: ['promo'] });
     const promoContainer = createNode({ tag: 'div', classes: ['promo__inner', 'container'], parent: promo });
@@ -44,12 +41,9 @@ export class Main {
   drawCatalogFilters() {
     const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
     const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
-    form.append(
-      this.search.drow(),
-      this.sort.drow(),
-      this.filterListByCategories.drow(),
-      this.filterListByAuthors.drow()
-    );
+    const search = new Search(this.changeHandler);
+    const sort = new Sort(this.changeHandler);
+    form.append(search.drow(), sort.drow(), this.filterListByCategories.drow(), this.filterListByAuthors.drow());
 
     const filtersRanges = createNode({ tag: 'fieldset', classes: ['filters__ranges'], parent: form });
     const rangePrice = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
@@ -123,17 +117,19 @@ export class Main {
     return catalogFilters;
   }
 
-  drawCatalogList() {
-    const catalogList = createNode({ tag: 'ul', classes: ['catalog__list', 'product-list'] });
-    this.products.forEach((product) => {
+  drawCatalogList(products: Book[]) {
+    if (this.catalogList) {
+      this.catalogList.remove();
+    }
+    this.catalogList = createNode({ tag: 'ul', classes: ['catalog__list', 'product-list'] });
+    products.forEach((product) => {
       const card = new Card(product);
-      catalogList.append(card.getCardElement());
+      if (this.catalogList) {
+        this.catalogList.append(card.getCardElement());
+      }
     });
-    console.log(catalogList);
-    return catalogList;
-  }
-  clear() {
-    const main = document.querySelector('#shop') as HTMLElement;
-    main.innerHTML = '';
+    if (this.catalogContainer) {
+      this.catalogContainer.append(this.catalogList);
+    }
   }
 }
