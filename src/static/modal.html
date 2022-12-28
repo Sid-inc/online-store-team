@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Book Store</title>
+    </head>
+    <body>
+    </body>
+    <section class="modal">
+      <div class="modal__inner">
+        <h2 class="modal__title visually-hidden">Order</h2>
+        <button class="modal__close button button--small button--close" aria-label="Close" type="button"></button>
+        <form class="modal__form form">
+          <fieldset class="form__group form-group">
+            <legend class="form-group__title">Personal information</legend>
+            <input class="form-group__field field field--error" type="text" placeholder="Name" required>
+            <span class="field-group__error">Empty name</span>
+            <input class="form-group__field field" type="text" placeholder="Phone" required>
+            <input class="form-group__field field" type="text" placeholder="Address" required>
+            <input class="form-group__field field" type="email" placeholder="Email" required>
+          </fieldset>
+          <fieldset class="form__group form-group form-group--card">
+            <legend class="form-group__title">Payments information</legend>
+            <div class="form-group__inner">
+              <img src="assets/images/visa.svg" alt="Pay system image" class="form-group__image" width="40" height="20">
+              <label class="form-group__label">
+                Card number
+                <input class="form-group__field field" type="text" placeholder="0000 0000 0000 0000" required>
+              </label>
+              <div class="form-group__bottom">
+                <label class="form-group__label">
+                  expiry date
+                  <input class="form-group__field field" type="text" placeholder="MM/YY" required>
+                </label>
+                <label class="form-group__label">
+                  CVV
+                  <input class="form-group__field field" type="text" placeholder="000" required>
+                  <span class="field-group__error">Wrong CVV</span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <button class="form__submit button button--primary" type="submit">Order</button>
+        </form>
+      </div>
+    </section>
+</html>
