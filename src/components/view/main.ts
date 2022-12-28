@@ -1,6 +1,5 @@
 import { Book, ChangeHandler } from '../../interfaces';
 import { books } from '../constants/constants';
-// import { countKeys } from '../utils/countDescription';
 import { createNode } from '../utils/createNode';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 import { Card } from './card';
@@ -16,8 +15,8 @@ export class Main {
   changeHandler: ChangeHandler;
   constructor(changeHandler: ChangeHandler) {
     this.changeHandler = changeHandler;
-    this.filterListByCategories = new FilterList(books, 'category');
-    this.filterListByAuthors = new FilterList(books, 'author');
+    this.filterListByCategories = new FilterList(books, 'category', changeHandler);
+    this.filterListByAuthors = new FilterList(books, 'author', changeHandler);
   }
 
   draw(products: Book[]) {

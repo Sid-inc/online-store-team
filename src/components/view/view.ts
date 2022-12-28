@@ -1,16 +1,10 @@
 import { ChangeHandler } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
-import { getSortValue, searchBooks } from '../utils/sort';
+import { getBooks } from '../utils/sortingAndFiltering';
 import { Footer } from './footer';
 import { Header } from './header';
 import { Main } from './main';
-function getBooks() {
-  const booksBySearch = searchBooks(books, settingsForSort);
-  getSortValue(booksBySearch, settingsForSort);
-  console.log(booksBySearch);
 
-  return booksBySearch;
-}
 export class View {
   header: Header;
   footer: Footer;
@@ -23,7 +17,7 @@ export class View {
 
   drawApp() {
     this.header.draw();
-    const booksForDrow = getBooks();
+    const booksForDrow = getBooks(books, settingsForSort);
     this.main.draw(booksForDrow);
     this.footer.draw();
   }
@@ -36,10 +30,28 @@ export class View {
       case 'addFiltersSort':
         settingsForSort.filtersSort = value;
         break;
+      case 'addcategory':
+        if (!settingsForSort.categorySort.includes(value)) {
+          settingsForSort.categorySort.push(value);
+        } else {
+          const index: number = settingsForSort.categorySort.indexOf(value);
+          settingsForSort.categorySort.splice(index, 1);
+        }
+
+        break;
+      case 'addauthor':
+        if (!settingsForSort.authorSort.includes(value)) {
+          settingsForSort.authorSort.push(value);
+        } else {
+          const index: number = settingsForSort.authorSort.indexOf(value);
+          settingsForSort.authorSort.splice(index, 1);
+        }
+
+        break;
       default:
         break;
     }
-    const booksForDrow = getBooks();
+    const booksForDrow = getBooks(books, settingsForSort);
     this.main.drawCatalogList(booksForDrow);
   };
 }

@@ -1,6 +1,6 @@
 import { Book, SettingsForSort } from '../../interfaces';
 
-export function searchBooks(arr: Book[], setting: SettingsForSort) {
+function searchBooks(arr: Book[], setting: SettingsForSort) {
   const val: string = setting.searchValue.toUpperCase();
   console.log(val);
 
@@ -19,9 +19,8 @@ export function searchBooks(arr: Book[], setting: SettingsForSort) {
   }
 }
 
-export function getSortValue(arr: Book[], setting: SettingsForSort) {
+function getSortValue(arr: Book[], setting: SettingsForSort) {
   const value = setting.filtersSort;
-  console.log(`value - ${value}`);
 
   switch (value) {
     case 'pasc':
@@ -36,36 +35,28 @@ export function getSortValue(arr: Book[], setting: SettingsForSort) {
 }
 
 function filterByAythor(arr: Book[], setting: SettingsForSort) {
+  console.log(`setting.authorSort - ${setting.authorSort}`);
   if (setting.authorSort.length === 0) {
     return arr;
   } else {
     return arr.filter((book) => setting.authorSort.includes(book.author));
-    // const sortArr: Book[] = setting.authorSort.reduce((acc: Book[], author) => {
-    //   for (let i = 0; i < arr.length; i++) {
-    //     if (author === arr[i].author) {
-    //       const book: Book = arr[i];
-    //       acc.push(book);
-    //     }
-    //   }
-    //   return acc;
-    // }, []);
-    // return sortArr;
   }
 }
-// function filterByCategory(arr: Book[], setting: SettingsForSort) {
-//   if (setting.categorySort.length === 0) {
-//     return arr;
-//   } else {
-//     const arrSort = arr.filter((el: Book) => setting.categorySort.includes(el.category));
-//     return arrSort;
-//   }
-// }
+function filterByCategories(arr: Book[], setting: SettingsForSort) {
+  console.log(`setting.category - ${setting.categorySort}`);
+  if (setting.categorySort.length === 0) {
+    return arr;
+  } else {
+    return arr.filter((book) => setting.categorySort.includes(book.category));
+  }
+}
 
-export function getBooks(arr: Book[], setting: SettingsForSort) {
-  const sortArr: Book[] = searchBooks(arr, setting);
-  getSortValue(sortArr, setting);
-  // filterByCategory(arr, setting);
-  filterByAythor(arr, setting);
-  console.log(sortArr);
-  return sortArr;
+export function getBooks(arr: Book[], settingsForSort: SettingsForSort) {
+  let booksBySearch = searchBooks(arr, settingsForSort);
+  getSortValue(booksBySearch, settingsForSort);
+  booksBySearch = filterByAythor(booksBySearch, settingsForSort);
+  booksBySearch = filterByCategories(booksBySearch, settingsForSort);
+  console.log(booksBySearch);
+
+  return booksBySearch;
 }

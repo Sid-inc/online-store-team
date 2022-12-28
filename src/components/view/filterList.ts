@@ -1,16 +1,17 @@
-import { Book } from '../../interfaces';
+import { Book, ChangeHandler } from '../../interfaces';
 import { createNode } from '../utils/createNode';
 import { countKeys } from '../utils/countDescription';
-import { books, settingsForSort } from '../constants/constants';
-import { getBooks } from '../utils/sort';
+import { toggleActiveClass } from '../utils/toggleActiveClass';
 
 export class FilterList {
   product: Book[];
   key: keyof Pick<Book, 'author' | 'category'>;
+  changeHandler: ChangeHandler;
 
-  constructor(product: Book[], key: keyof Pick<Book, 'author' | 'category'>) {
+  constructor(product: Book[], key: keyof Pick<Book, 'author' | 'category'>, changeHandler: ChangeHandler) {
     this.product = product;
     this.key = key;
+    this.changeHandler = changeHandler;
   }
 
   drow() {
@@ -42,16 +43,8 @@ export class FilterList {
       createNode({ tag: 'span', classes: ['categories-item__name'], text: category[0], parent: button });
       createNode({ tag: 'span', classes: ['categories-item__count'], text: `(${category[1]})`, parent: button });
       button.addEventListener('click', () => {
-        const category = button.childNodes[0].textContent as string;
-        if (!settingsForSort[`${this.key}Sort`].includes(category)) {
-          settingsForSort[`${this.key}Sort`].push(category);
-          return getBooks(books, settingsForSort);
-        } else {
-          const index: number = settingsForSort[`${this.key}Sort`].indexOf(category);
-          settingsForSort[`${this.key}Sort`].splice(index, 1);
-        }
-
-        console.log(settingsForSort);
+        this.changeHandler(`add${this.key}`, button.childNodes[0].textContent as string);
+        toggleActiveClass(button);
       });
       categoriesList.append(li);
     });
