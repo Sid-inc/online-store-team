@@ -25,7 +25,7 @@ export const books: Book[] = [
     id: 2,
     title: 'The Complete Novels of Sherlock Holmes',
     author: 'Arthur Conan Doyle',
-    price: 137,
+    price: 54.55,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81StezluKUS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/914eICOJ5NL.jpg',
@@ -43,7 +43,7 @@ export const books: Book[] = [
     id: 3,
     title: '1984',
     author: 'George Orwell',
-    price: 489,
+    price: 249.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81vHA1+GmhS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81nLM3CiOHL.jpg',
@@ -54,14 +54,14 @@ export const books: Book[] = [
     cover: Cover.HARDCOVER,
     description:
       "First published in the summer of 1949, George Orwell's 1984 is one of the most definitive texts of modern literature. This delectable leather-bound edition, beautifully crafted and elegantly designed, comes with a ribbon bookmark, gilded edges, and beautiful endpapers. Set in Oceania, one of the three inter-continental superstate that divided the world among themselves after a global war, Orwell's masterful critique of the political structures of the time works itself out through the story of Winston Smith, a man caught in the webs of a dystopian future, and his clandestine love affair with Julia, a young woman he meets during the course of his work for the government. As much as it is an entertaining read, 1984 is also a brilliant, and more importantly, a timeless satirical attack on the social and political structures of the world.",
-    amount: 200,
+    amount: 22,
   },
   {
     category: 'adventure',
     id: 4,
     title: 'Robinson Crusoe',
     author: 'Daniel Defoe',
-    price: 99,
+    price: 36.25,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81cp-sm9FzS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81FX-yUxY8S.jpg',
@@ -72,14 +72,14 @@ export const books: Book[] = [
     cover: Cover.PAPERBACK,
     description:
       "September 1, 1651. With a passion and longing for the sea, Robinson Crusoe sets on a sea voyage, much against the wishes of his family, only to survive a shipwreck. But he doesn't give up. And after a series of adventurous journeys, eight years later on the same day of September, Crusoe sets sail again. Caught in a sea storm, he is washed ashore on a deserted island after the shipwreck. The sole human survivor, along with a dog and two cats, Crusoe builds his life with whatever is available around and begins to contemplate and consider his situation. Evil: I am cast upon a horrible, desolate island, void of all hope of recovery.Good: But I am alive; and not drowned, as all my ship's company were. Will his adventures end here, or is there more in store for him Establishing realistic fiction as a literary genre, Daniel Defoe's Robinson Crusoe is regarded as the first English novel. With simple characters and an exceptional interpretation of life, it went on to become a literary masterpiece. The novel has undergone various adaptions and continues to remain an epic.",
-    amount: 88,
+    amount: 18,
   },
   {
     category: 'children',
     id: 5,
     title: 'The Adventures of Tom Sawyer',
     author: 'Mark Twain',
-    price: 63,
+    price: 48.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KTDij0XyS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/810c9q8YfmS.jpg',
@@ -97,7 +97,7 @@ export const books: Book[] = [
     id: 6,
     title: 'The Adventures of Huckleberry Finn',
     author: 'Mark Twain',
-    price: 109,
+    price: 51.17,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/811euwWZ+dS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81wXusqXhaS.jpg',
@@ -108,14 +108,14 @@ export const books: Book[] = [
     cover: Cover.PAPERBACK,
     description:
       'Huck is back.. Taken for a son by Widow Douglas; struggling against the society and its attempts to ‘civilize’ him.Escaping his alcoholic father by faking his death, we join him as he voyages down the Mississippi River seeking liberation. Finding his way to Jackson’s island he meets Jim, Mrs. Watson’s runaway slave. What happens as they team up, capture a raft and encounter a seemingly haphazard array of people and situations? Immersed in deadly violence, finding tranquility only on the river with Jim, will Huckleberry Finn find the freedom and independence he is seeking? A direct sequel to the Adventures of Tom Sawyer, it traces Huck’s moral development as he moves from having an unthinking acceptance of received knowledge and values to developing an independently achieved understanding of what is right.A scathing satire on entrenched attitudes, Twain’s the Adventures of Huckleberry Finn defines the American Dream of young heroes. Sometimes ironic, sometimes mocking, sometimes boyish and exuberant, it is named among the Great American Novels.',
-    amount: 82,
+    amount: 28,
   },
   {
     category: 'children',
     id: 7,
     title: 'The Merry Adventures Of Robin Hood',
     author: 'Howard Pyle',
-    price: 139.65,
+    price: 69.65,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81p7i7vJiGS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/916vgKv6mES.jpg',
@@ -133,7 +133,7 @@ export const books: Book[] = [
     id: 8,
     title: 'Just So Stories',
     author: 'Rudyard Kipling',
-    price: 164.25,
+    price: 64.25,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81xh95E0spL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/716f2PqpnfL.jpg',
@@ -151,7 +151,7 @@ export const books: Book[] = [
     id: 9,
     title: 'Gullivers Travels',
     author: 'Jonathan Swift',
-    price: 446,
+    price: 199.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81OGJ-a3xCS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/814vO0KuDlS.jpg',
@@ -162,14 +162,14 @@ export const books: Book[] = [
     cover: Cover.HARDCOVER,
     description:
       "Every Man Desires to Live Long, But No Man Wishes to Be Old.?Shipwrecked on his first voyage, he wakes up in Lilliput'a kingdom of tiny people who are one-twelfth the height of human beings.. Blown off course by the gales on his second, he is sold to the queen by a giant farmer in Brobdingnag.. Attacked by pirates on his third, marooned near a desolate island, he discovers Laputa?the flying island with educated but impractical people..And as a captain of a merchantman on his fourth voyage, abandoned on a landing boat by his crew, he meets Houyhnhnms?a race of talking horses who are the rulers and Yahoos?the deformed creatures who are human beings in their base form. Meet Lemuel Gulliver, as he describes his adventurous voyages across the islands he lands upon.A universally-read satirical fantasy, Jonathan Swift's Gulliver's Travels continues to remain a classic of English literature even more than two and a half centuries after it was first published.",
-    amount: 90,
+    amount: 49,
   },
   {
     category: 'fiction',
     id: 10,
     title: '1984',
     author: 'George Orwell',
-    price: 54,
+    price: 99.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81fcLJo+FNL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81Jqipul+aL.jpg',
@@ -187,7 +187,7 @@ export const books: Book[] = [
     id: 11,
     title: 'Animal Farm',
     author: 'George Orwell',
-    price: 49,
+    price: 79,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71WI1r5j6HS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91X38lJwhuL.jpg',
@@ -205,7 +205,7 @@ export const books: Book[] = [
     id: 12,
     title: 'The Picture of Dorian Gray',
     author: 'Oscar Wilde',
-    price: 402,
+    price: 172,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81opmtlMQ5L.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81UMlcJ++fL.jpg',
@@ -223,7 +223,7 @@ export const books: Book[] = [
     id: 13,
     title: 'The Great Gatsby',
     author: 'F. Scott Fitzgerald',
-    price: 325,
+    price: 85,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71sJRMkeBNS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KHq5cLaGL.jpg',
@@ -259,7 +259,7 @@ export const books: Book[] = [
     id: 15,
     title: 'War and Peace',
     author: 'Leo Tolstoy',
-    price: 699,
+    price: 299.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KPzmVf2mL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/817OvUX5pCL.jpg',
@@ -277,7 +277,7 @@ export const books: Book[] = [
     id: 16,
     title: 'Treasure Island',
     author: 'Robert Louis Stevenson',
-    price: 150.23,
+    price: 70.23,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/819gepUWtdS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KEIFn8oIS.jpg',
@@ -295,7 +295,7 @@ export const books: Book[] = [
     id: 17,
     title: 'Crime and Punishment',
     author: 'Fyodor Dostoevsky',
-    price: 583,
+    price: 183,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81vTpOYpwOL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71DRqUnf+VL.jpg',
@@ -313,7 +313,7 @@ export const books: Book[] = [
     id: 18,
     title: 'The Greatest Works of George Orwell',
     author: 'George Orwell',
-    price: 299,
+    price: 99.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81ZP6UV-y1S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81qrl4UcFZS.jpg',
@@ -331,7 +331,7 @@ export const books: Book[] = [
     id: 19,
     title: 'The Lost World',
     author: 'Arthur Conan Doyle',
-    price: 129,
+    price: 89.02,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/916RXLP7bFL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81QgpbbeApL.jpg',
@@ -367,7 +367,7 @@ export const books: Book[] = [
     id: 21,
     title: 'The Prince and the Pauper',
     author: 'Mark Twain',
-    price: 142.5,
+    price: 82.5,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81XdTyHW0YL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71Ozwu5ygVL.jpg',
@@ -385,7 +385,7 @@ export const books: Book[] = [
     id: 22,
     title: 'The Jungle Book',
     author: 'Rudyard Kipling',
-    price: 99,
+    price: 69,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81HPv6PnpCS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81ABgNA0CUS.jpg',
@@ -403,7 +403,7 @@ export const books: Book[] = [
     id: 23,
     title: 'The Greatest Novels of Mark Twain',
     author: 'Mark Twain',
-    price: 499,
+    price: 299,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/814Ynk2xy8S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81m+TpdTZPL.jpg',
@@ -421,7 +421,7 @@ export const books: Book[] = [
     id: 24,
     title: 'Macbeth',
     author: 'William Shakespeare',
-    price: 96,
+    price: 106,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71JLzfjq57S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71vKRps2huL.jpg',
@@ -439,7 +439,7 @@ export const books: Book[] = [
     id: 25,
     title: 'The Three Musketeers',
     author: 'Alexandre Dumas',
-    price: 169,
+    price: 109,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71BzSTXtH7L.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/714SClI2neL.jpg',
@@ -457,7 +457,7 @@ export const books: Book[] = [
     id: 26,
     title: 'Oliver Twist',
     author: 'Charles Dickens',
-    price: 149,
+    price: 59,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81X9mpk-mwS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91nIxYbBx6L.jpg',
@@ -475,7 +475,7 @@ export const books: Book[] = [
     id: 27,
     title: 'The Complete Novels of Sherlock Holmes',
     author: 'Arthur Conan Doyle',
-    price: 405,
+    price: 205,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KDmsPWVlS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/912govRG21L.jpg',
@@ -486,7 +486,7 @@ export const books: Book[] = [
     cover: Cover.HARDCOVER,
     description:
       'This collectable hardbound deluxe edition is beautifully crafted and designed. Perfect for gifting as well as for keeps. A prized edition for any library. ?There?s the scarlet thread of murder running through the colourless skein of life and our duty is to unravel it and isolate it and expose every inch of it. ?Sherlock HolmesConsulting Detective 221B Baker Street, London. This is where begins a historical partnership between Dr. Watson the archetypal gentleman from the Victorian era and the eccentric, legendary sleuth, Sherlock Holmes. Join them as they gather clues, ranging from bloodstains and footprints to cigarette ash and wedding rings and arrive at unusual and surprising conclusions. This leather-bound, deluxe edition is a collection of the four novels written by Sir Arthur Conan Doyle: A Study in Scarlet (1887), the Sign of the Four (1890), the Hound of the Baskervilles (1902) and the Valley of Fear (1915). Featuring the timeless detective Sherlock Holmes, these novels have been successfully engrossing readers for more than a century now.',
-    amount: 99,
+    amount: 49,
   },
   {
     category: 'classic',
@@ -529,7 +529,7 @@ export const books: Book[] = [
     id: 30,
     title: 'Wuthering Heights',
     author: 'Emily Bronte',
-    price: 99,
+    price: 97.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81+x6eHkSdS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91rYn7jTFxL.jpg',
@@ -547,7 +547,7 @@ export const books: Book[] = [
     id: 31,
     title: 'Greatest Comedies of Shakespeare',
     author: 'William Shakespeare',
-    price: 399,
+    price: 189,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91iXOsD4itS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81LSekLjNTL.jpg',
@@ -565,7 +565,7 @@ export const books: Book[] = [
     id: 32,
     title: 'Greatest Tragedies of Shakespeare',
     author: 'William Shakespeare',
-    price: 499,
+    price: 179.09,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91cyxhmf4cS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/718GKfxfNgL.jpg',
@@ -583,7 +583,7 @@ export const books: Book[] = [
     id: 33,
     title: 'Journey to the Centre of the Earth',
     author: 'Jules Verne',
-    price: 99,
+    price: 93.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/8127crrQWJL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81tcV0eLhGS.jpg',
@@ -612,14 +612,14 @@ export const books: Book[] = [
     cover: Cover.PAPERBACK,
     description:
       'Fingerprint! Pocket Classics are perfect pocket-sized editions with complete original content. Convenient to carry, priced right and ideal for gifting and collecting, each classic with its vibrant cover and flap jacket offers an ultimate reading experience. On a warm evening in the Seeonee hills, a family of wolves finds someone at the threshold of their cave?a human child, who knows nothing of the world of men. Adopted by Father Wolf, the man-cub Mowgli grows up with the pack in the Jungle. He begins his journey and learns the law of the Jungle with the help of his new-found friends. Embark on this adventurous journey with Mowgli and many others, as you read the enchanting The Jungle Book.',
-    amount: 80,
+    amount: 30,
   },
   {
     category: 'fiction',
     id: 35,
     title: 'The Call Of The Wild',
     author: 'Jack London',
-    price: 140,
+    price: 100,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/61p+TVZG19S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81E5fuqQJ9L.jpg',
@@ -637,7 +637,7 @@ export const books: Book[] = [
     id: 36,
     title: 'The Importance of Being Earnest',
     author: 'Oscar Wilde',
-    price: 45,
+    price: 75,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71RZBszBLkS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81ptGGnjNkS.jpg',
@@ -655,7 +655,7 @@ export const books: Book[] = [
     id: 37,
     title: 'The Greatest Short Stories of Anton Chekhov',
     author: 'Anton Chekhov',
-    price: 229,
+    price: 97,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81-Y2qizxxS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/810dJH8qgrS.jpg',
@@ -673,7 +673,7 @@ export const books: Book[] = [
     id: 38,
     title: 'Great Expectations',
     author: 'Charles Dickens',
-    price: 449,
+    price: 249.99,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/814S3F7UB9S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81LXPqobHpL.jpg',
@@ -691,7 +691,7 @@ export const books: Book[] = [
     id: 39,
     title: 'Gone with the Wind',
     author: 'Margaret Mitchell',
-    price: 699,
+    price: 189,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/819bFn9OHDS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81DLWJXDjPL.jpg',
@@ -709,7 +709,7 @@ export const books: Book[] = [
     id: 40,
     title: "The Complete Grimms' Fairy Tales",
     author: 'Jacob Grimm & Wilhelm Grimm',
-    price: 199,
+    price: 109,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81zr7PyHa5S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91f5YEimu3S.jpg',
@@ -727,7 +727,7 @@ export const books: Book[] = [
     id: 41,
     title: "The Complete Grimms' Fairy Tales",
     author: 'Jacob Grimm & Wilhelm Grimm',
-    price: 789.95,
+    price: 249.95,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91xEPAl95+S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81w-kpPXL8L.jpg',
@@ -774,14 +774,14 @@ export const books: Book[] = [
     cover: Cover.PAPERBACK,
     description:
       '“There is nothing more deceptive than an obvious fact.”He has no knowledge of literature, philosophy or astronomy. But his chemistry is strong, anatomy is explicit, remembers every horror committed in detail and is completely aware of the British Law.Meet Sherlock Holmes, the ruthless and self-disciplined detective who takes up every case as an intellectual challenge. He not only solves mysteries and discovers murderers, thieves and criminals, but also identifies the social injustices and provides a new and just approach to remedy them. A collection of twelve short stories, many of which were Doyle’s favorite, the Adventures of Sherlock Holmes was well received on its publication. Listed with the Guinness World Records as the ‘most portrayed movie character’ in history, Sherlock Holmes has been adapted numerous times and continues to remain a timeless detective.',
-    amount: 176,
+    amount: 16,
   },
   {
     category: 'classic',
     id: 44,
     title: 'The Count of Monte Cristo',
     author: 'Alexandre Dumas',
-    price: 299,
+    price: 139,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/816KABRp8-S.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81ZG-FuqZlS.jpg',
@@ -799,7 +799,7 @@ export const books: Book[] = [
     id: 45,
     title: 'The Man In The Iron Mask',
     author: 'Alexandre Dumas',
-    price: 159.75,
+    price: 139.75,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/716NIXc-mCL.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81mASkt2m1L.jpg',
@@ -817,7 +817,7 @@ export const books: Book[] = [
     id: 46,
     title: 'The Beautiful and Damned',
     author: 'F. Scott Fitzgerald',
-    price: 159.75,
+    price: 104.75,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91gO+dKxJWS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81QzjqKMP-S.jpg',

@@ -4,25 +4,29 @@ import { getBooks } from '../utils/sortingAndFiltering';
 import { Footer } from './footer';
 import { Header } from './header';
 import { Main } from './main';
+import { Promo } from './promo';
 
 export class View {
   header: Header;
   footer: Footer;
   main: Main;
+  promo: Promo;
   constructor() {
     this.header = new Header();
     this.footer = new Footer();
+    this.promo = new Promo();
     this.main = new Main(this.changeHandler);
   }
 
   drawApp() {
     this.header.draw();
+    this.promo.draw();
     const booksForDrow = getBooks(books, settingsForSort);
-    this.main.draw(booksForDrow);
+    this.main.draw();
+    this.main.drawCataog(booksForDrow);
     this.footer.draw();
   }
   changeHandler: ChangeHandler = (action, value) => {
-    console.log(action, value);
     switch (action) {
       case 'setSearchValue':
         settingsForSort.searchValue = value;
@@ -52,6 +56,6 @@ export class View {
         break;
     }
     const booksForDrow = getBooks(books, settingsForSort);
-    this.main.drawCatalogList(booksForDrow);
+    this.main.drawCataog(booksForDrow);
   };
 }
