@@ -1,4 +1,5 @@
-import { Book, Cover } from '../../interfaces';
+import { Book, Cover, SettingsForSort } from '../../interfaces';
+import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 
 export const books: Book[] = [
   {
@@ -53,7 +54,7 @@ export const books: Book[] = [
     cover: Cover.HARDCOVER,
     description:
       "First published in the summer of 1949, George Orwell's 1984 is one of the most definitive texts of modern literature. This delectable leather-bound edition, beautifully crafted and elegantly designed, comes with a ribbon bookmark, gilded edges, and beautiful endpapers. Set in Oceania, one of the three inter-continental superstate that divided the world among themselves after a global war, Orwell's masterful critique of the political structures of the time works itself out through the story of Winston Smith, a man caught in the webs of a dystopian future, and his clandestine love affair with Julia, a young woman he meets during the course of his work for the government. As much as it is an entertaining read, 1984 is also a brilliant, and more importantly, a timeless satirical attack on the social and political structures of the world.",
-    amount: 0,
+    amount: 200,
   },
   {
     category: 'adventure',
@@ -130,19 +131,19 @@ export const books: Book[] = [
   {
     category: 'children',
     id: 8,
-    title: 'Alices Adventure in Wonderland',
-    author: 'Lewis Carroll',
-    price: 143.25,
+    title: 'Just So Stories',
+    author: 'Rudyard Kipling',
+    price: 164.25,
     urlToImages: [
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71nAo7iUGPL.jpg',
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/819bnI4Bf8L.jpg',
-      'image.png',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81xh95E0spL.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/716f2PqpnfL.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81cNDVLex+L.jpg',
     ],
-    rating: 4.26,
+    rating: 4.4,
     isBestSeller: false,
-    cover: Cover.HARDCOVER,
+    cover: Cover.PAPERBACK,
     description:
-      'Alice’s adventures in Wonderland is a fantasy novel by English writer Lewis Carroll. The book has twelve, large, beautifully crafted popups which tell the story in an innovative manner. What adds to the magnificence a peep show which depicts Alice falling into Wonderland. It tells of a girl named Alice who falls down a rabbit hole into a fantasy world populated by peculiar creatures. The tale plays with logic, giving the story lasting popularity with adults as well as with children. It is considered to be one of the best examples of the literary nonsense genre. Its narrative course and structure, characters and imagery have been enormously influential in both popular culture and literature, especially in the fantasy genre.',
+      'Rudyard Kipling told his children gloriously fanciful tales of how things in the world came to be as they are. These magical and timeless tales have been retold for over a century, and his imagination and writing continue to enthral and entertain children and families the world over.',
     amount: 8,
   },
   {
@@ -150,18 +151,18 @@ export const books: Book[] = [
     id: 9,
     title: 'Gullivers Travels',
     author: 'Jonathan Swift',
-    price: 0,
+    price: 446,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81OGJ-a3xCS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/814vO0KuDlS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81jAOE4CvIS.jpg',
     ],
-    rating: 0,
+    rating: 4.4,
     isBestSeller: true,
     cover: Cover.HARDCOVER,
     description:
       "Every Man Desires to Live Long, But No Man Wishes to Be Old.?Shipwrecked on his first voyage, he wakes up in Lilliput'a kingdom of tiny people who are one-twelfth the height of human beings.. Blown off course by the gales on his second, he is sold to the queen by a giant farmer in Brobdingnag.. Attacked by pirates on his third, marooned near a desolate island, he discovers Laputa?the flying island with educated but impractical people..And as a captain of a merchantman on his fourth voyage, abandoned on a landing boat by his crew, he meets Houyhnhnms?a race of talking horses who are the rulers and Yahoos?the deformed creatures who are human beings in their base form. Meet Lemuel Gulliver, as he describes his adventurous voyages across the islands he lands upon.A universally-read satirical fantasy, Jonathan Swift's Gulliver's Travels continues to remain a classic of English literature even more than two and a half centuries after it was first published.",
-    amount: 900,
+    amount: 90,
   },
   {
     category: 'fiction',
@@ -215,14 +216,14 @@ export const books: Book[] = [
     cover: Cover.HARDCOVER,
     description:
       '“The soul is a terrible reality. It can be bought and sold and bartered away.” Meet Dorian Gray, the beautiful young man with an impossibly charming face and spirit. As he sits for Basil Hallward—a deeply moral artist and a friend of the impish Lord Henry—who becomes obsessed with his beauty and wants to paint him, Dorian is enchanted by the perfection of his portrait. But, influenced by the well-phrased epigrams of the hedonist Lord Henry on the transience of youth and beauty, Dorian becomes jealous of it and wishes that the portrait bear the scars of his passing youth and age, while he would remain young forever. And alas, his wish comes true! Enticed into dissolution and degradation while his portrait is aging in the attic, Dorian engages in scandals and sinful pleasures. We see him go from good to evil. But is he any happier? This is a hardbound deluxe edition of the only novel written by Oscar Wilde, The Picture of Dorian Gray is an arresting moral commentary and a classic example of Gothic fiction. With an unparalleled depiction of the Faustian bargain, this parable of aesthetic ideal remains a literary masterpiece almost 125 years after its publication.',
-    amount: 0,
+    amount: 10,
   },
   {
     category: 'classic',
     id: 13,
     title: 'The Great Gatsby',
     author: 'F. Scott Fitzgerald',
-    price: 0,
+    price: 325,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71sJRMkeBNS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KHq5cLaGL.jpg',
@@ -251,7 +252,7 @@ export const books: Book[] = [
     cover: Cover.PAPERBACK,
     description:
       '“All great literature is one of two stories; a man goes on a journey or a stranger comes to town.” with a career spanning almost half a century, Leo Tolstoy penned down some of the world’s greatest and most celebrated works. This edition brings for you his thirty-five best short stories ranging from stories for children, stories for the people, and Russian folk tales to his adaptations from French stories and the ones written for the Jewish pogrom victims in Russia. It includes ‘the snowstorm’ (1856), ‘polikushka’ (1863), ‘The prisoner of the Caucasus’ (1872), ‘where love is, there God is also’ (1885), ‘two old men’ (1885), ‘Ivan the fool’ (1885), ‘kholstomír’ (1885), ‘The Imp and the crust’ (1886), ‘The coffee house of Surat’ (1893), ‘master and man’ (1895), ‘father sergius’, ‘work, death and sickness’, ‘after the dance’, and ‘Alyosha the pot’ (1911), among his other masterpieces. An editorial note precedes each work.',
-    amount: 208,
+    amount: 28,
   },
   {
     category: 'russian',
@@ -272,21 +273,21 @@ export const books: Book[] = [
     amount: 3,
   },
   {
-    category: 'classic',
+    category: 'adventure',
     id: 16,
-    title: 'Jane Eyre',
-    author: 'Charlotte Bronte',
-    price: 999,
+    title: 'Treasure Island',
+    author: 'Robert Louis Stevenson',
+    price: 150.23,
     urlToImages: [
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/61sygW3CQeL.jpg',
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81ooOnzVSpL.jpg',
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/61cMFJGDthL.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/819gepUWtdS.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81KEIFn8oIS.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81B3lJa0fJS.jpg',
     ],
     rating: 5,
     isBestSeller: false,
-    cover: Cover.HARDCOVER,
+    cover: Cover.PAPERBACK,
     description:
-      'It is in vain to say human beings ought to be satisfied with tranquility: they must have action; and they will make it if they cannot find it. Millions are condemned to a stiller doom than mine and millions are in silent revolt against their lot. Nobody knows how many rebellions besides political rebellions ferment in the masses of life which people earth. Women are supposed to be very calm generally: but women feel just as men feel; they need exercise for their faculties and a field for their efforts, as much as their brothers do; they suffer from too rigid a restraint, too absolute a stagnation, precisely as men would suffer; and it is narrow-minded in their more privileged fellow-creatures to say that they ought to confine themselves to making puddings and knitting stockings, to playing on the piano and embroidering bags. It is thoughtless to condemn them, or laugh at them, if they seek to do more or learn more than custom has pronounced necessary for their sex.',
+      'Think of the high seas and of a buccaneer ship; of a wild seaman with a sea chest full of gold; of Long John Silver; of a buried treasure and of young Jim Hawkins, the boy with the treasure map the key to it all. This is the Treasure Island and if you don’t think of all this, the pirates will hunt you down and when they find you, for find you they sure will, they will truss you and carry you back to their ship and just before they feed you to the sharks, as you walk the gangplank with a sword digging sharp and sure into your back, they will sing their one last song for you. “Fifteen men on the dead man’s chest Yo-ho-ho and a bottle of rum!”',
     amount: 8,
   },
   {
@@ -328,19 +329,19 @@ export const books: Book[] = [
   {
     category: 'adventure',
     id: 19,
-    title: 'Greatest Works of Edgar Allan Poe',
-    author: 'Edgar Allan Poe',
-    price: 663.58,
+    title: 'The Lost World',
+    author: 'Arthur Conan Doyle',
+    price: 129,
     urlToImages: [
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81OgEzwHyyS.jpg',
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81G1A8hycRL.jpg',
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91VeXIz9PdL.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/916RXLP7bFL.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81QgpbbeApL.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81FdNslpmyL.jpg',
     ],
     rating: 4.7,
     isBestSeller: false,
-    cover: Cover.HARDCOVER,
+    cover: Cover.PAPERBACK,
     description:
-      'This collectable hardbound deluxe edition is beautifully crafted and designed. Perfect for gifting as well as for keeps. A prized edition for any library. A compilation of Edgar Allan Poe’s well-known works, this edition is perfect as a keepsake. It includes some of his timeless masterpieces namely ‘Annabel Lee’, ‘The Raven’, ‘To Helen’, ‘MS. Found in a Bottle’, ‘The Fall of the House of Usher’, ‘The Murders in the Rue Morgue’, ‘The Tell-Tale Heart’ and ‘The Gold-Bug’ among others. Also included are his seminal essays, Poe’s review of the Twice-Told Tales, and a selection of his letters written to the editors of periodicals, his friends, his wife and to Mrs. Whitman. An editorial note precedes each work',
+      '“So tomorrow we disappear into the unknown. . . It may be our last word to those who are interested in our fate. ” dinosaurs, pterodactyls, ape-men, and other prehistoric creatures still roam among us. This ground-breaking discovery has been made by the notorious Professor George Edward Challenger, who is a brilliant scientist. But this revelation has been subjected to ridicule. In order to believe, people need proof. So, that’s what he will give them. Braving danger and risking his life, Challenger will set foot into the depths of the amazonian plateau of South America. Accompanying him in this extraordinary adventure are his professional rival Professor summerlee, journalist Edward Malone, and Lord John roxton. In the dense foliage of the dark, lost world, will Challenger find the proof he is looking for? And, if he does, will he survive? Arthur Conan Doyle the lost world became an instant success on publication. It is one of the best sci-fi stories ever written and is considered a classic that has set the standard for all fantasy-adventure stories.',
     amount: 4,
   },
   {
@@ -377,7 +378,7 @@ export const books: Book[] = [
     cover: Cover.PAPERBACK,
     description:
       'One day, when Tom canty, a London pauper, and Edward Tudor, the prince of Wales, come across each other, they discover that they don’t just look alike but are also the same age. As each is fascinated by the other life, The prince and the pauper decide to exchange roles. “A few minutes later the little prince of Wales was garlanded with Tom’s fluttering odds and ends, and the little prince of pauperdom was tricked out in the gaudy plumage of royalty. The two went and stood side by side before a great mirror, and Lo, a miracle: there did not seem to have been any change made!” what happens when the king dies and the prince has to take over the throne? A classic satire on the social conventions and injustices, the prince and the pauper is a timeless comedy of mistaken identities. It has been adapted for stage, Comics, films, and television time and again.',
-    amount: 0,
+    amount: 13,
   },
   {
     category: 'children',
@@ -794,8 +795,26 @@ export const books: Book[] = [
     amount: 16,
   },
   {
-    category: 'classic',
+    category: 'adventure',
     id: 45,
+    title: 'The Man In The Iron Mask',
+    author: 'Alexandre Dumas',
+    price: 159.75,
+    urlToImages: [
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/716NIXc-mCL.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81mASkt2m1L.jpg',
+      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/714zTGg0ghL.jpg',
+    ],
+    rating: 4.3,
+    isBestSeller: false,
+    cover: Cover.PAPERBACK,
+    description:
+      'It has been eight years since Philippe was captured and locked in the prison of Bastille. He languishes here, wondering what he could have possibly done to deserve such an unending, cruel punishment. And why is his face always under the clasp of an iron mask? Eight long years, Philippe has only wondered. Now, the truth is finally revealed to him. Aramis, one of the three musketeers, goes to Philippe’s cell and hands over a mirror and a portrait of the reigning King Louis XIV. Philippe is the twin brother of the King of France, and Aramis intends to put him on the throne. The corrupt and destructive ways of the current king have gone on for far too long. THE FINAL AND THE MOST DANGEROUS ADVENTURE OF THE THREE MUSKETEERS DRAWS NEAR, ONE THAT WILL BRING THEM HEAD TO HEAD WITH THE MOST POWERFUL MAN IN FRANCE.',
+    amount: 11,
+  },
+  {
+    category: 'classic',
+    id: 46,
     title: 'The Beautiful and Damned',
     author: 'F. Scott Fitzgerald',
     price: 159.75,
@@ -812,3 +831,14 @@ export const books: Book[] = [
     amount: 17,
   },
 ];
+
+export const settingsForSort: SettingsForSort = {
+  searchValue: '',
+  filtersSort: 'pasc',
+  categorySort: [],
+  authorSort: [],
+  priceRangeMin: minPrice(books),
+  priceRangeMax: maxPrice(books),
+  countRangeMin: minAmount(books),
+  countRangeMax: maxAmount(books),
+};
