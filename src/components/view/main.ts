@@ -45,6 +45,14 @@ export class Main {
     form.append(search.drow(), sort.drow(), this.filterListByCategories.drow(), this.filterListByAuthors.drow());
 
     const filtersRanges = createNode({ tag: 'fieldset', classes: ['filters__ranges'], parent: form });
+    // noUiSlider.create(filtersRanges, {
+    //   start: [20, 80],
+    //   connect: true,
+    //   range: {
+    //     min: 0,
+    //     max: 100,
+    //   },
+    // });
     const rangePrice = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
     createNode({
       tag: 'label',
