@@ -95,7 +95,7 @@ export class Main {
     filtersRanges.append(rangePriceTitle, rangePrice.drawSlider(), rangeAmountTitle, rangeAmount.drawSlider());
 
     const filtersFooter = createNode({ tag: 'footer', classes: ['filters__footer'], parent: form });
-    createNode({
+    const buttonClean = createNode({
       tag: 'button',
       classes: ['button', 'button--primary'],
       text: 'Clean',
@@ -108,6 +108,9 @@ export class Main {
       text: 'Copy',
       atributesAndValues: [['type', 'button']],
       parent: filtersFooter,
+    });
+    buttonClean.addEventListener('click', () => {
+      this.changeHandler('cleanSettings', '');
     });
 
     return catalogFilters;

@@ -1,5 +1,6 @@
 import { ChangeHandler } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
+import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 import { getBooks } from '../utils/sortingAndFiltering';
 import { Footer } from './footer';
 import { Header } from './header';
@@ -66,7 +67,13 @@ export class View {
       case 'addMaxAmount':
         settingsForSort.countRangeMax = +value.split(';')[1];
         break;
-
+      case 'cleanSettings':
+        settingsForSort.categorySort = [];
+        settingsForSort.authorSort = [];
+        settingsForSort.priceRangeMin = minPrice(books);
+        settingsForSort.priceRangeMax = maxPrice(books);
+        settingsForSort.countRangeMin = minAmount(books);
+        settingsForSort.countRangeMax = maxAmount(books);
       default:
         break;
     }
