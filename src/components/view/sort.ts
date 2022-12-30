@@ -1,5 +1,4 @@
 import { ChangeHandler } from '../../interfaces';
-import { settingsForSort } from '../constants/constants';
 import { createNode } from '../utils/createNode';
 
 export class Sort {
@@ -33,18 +32,7 @@ export class Sort {
       atributesAndValues: [['value', 'rdsc']],
       text: 'Rating dsc',
     });
-    const options = document.querySelectorAll('option');
-    options.forEach((option) => {
-      if (option.id === settingsForSort.filtersSort) {
-        console.log(`option.id - ${option.id};`);
 
-        option.selected = true;
-        sort.prepend(option);
-      } else {
-        option.selected = false;
-        sort.append(option);
-      }
-    });
     sort.append(optionPasc, optionPdsc, optionRasc, optionRdsc);
     sort.addEventListener('change', () => {
       this.changeHandler('addFiltersSort', sort.value);

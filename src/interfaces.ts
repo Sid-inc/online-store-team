@@ -29,3 +29,4 @@ export interface SettingsForSort {
 }
 
 export type ChangeHandler = (action: string, value: string) => void;
+export type MaxAndMin = (arr: Book[]) => number;

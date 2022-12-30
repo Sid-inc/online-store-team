@@ -2,9 +2,11 @@ import { Book, ChangeHandler } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
 import { createNode } from '../utils/createNode';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
+import { getBooks } from '../utils/sortingAndFiltering';
 import { Card } from './card';
 import { FilterList } from './filterList';
 import { Search } from './search';
+import { Slider } from './slider';
 import { Sort } from './sort';
 
 export class Main {
@@ -32,7 +34,7 @@ export class Main {
     searhAndSortContainer.append(search.drow(), sort.drow());
   }
 
-  drawCataog(products: Book[]) {
+  drawCatalog(products: Book[]) {
     if (this.catalogContainer) {
       this.catalogContainer.remove();
     }
@@ -47,64 +49,50 @@ export class Main {
   }
 
   drawCatalogFilters() {
+    console.log(settingsForSort);
+
     const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
     const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
-
-    form.append(this.filterListByCategories.drow(), this.filterListByAuthors.drow());
+    const searchText = createNode({
+      tag: 'span',
+      classes: ['search__text'],
+      text: `${getBooks(books, settingsForSort).length} books found`,
+    });
+    form.append(searchText, this.filterListByCategories.drow(), this.filterListByAuthors.drow());
 
     const filtersRanges = createNode({ tag: 'fieldset', classes: ['filters__ranges'], parent: form });
-
-    const rangePrice = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
-    createNode({
-      tag: 'label',
+    const rangePriceTitle = createNode({
+      tag: 'div',
       classes: ['range__title'],
-      atributesAndValues: [['for', 'price']],
       text: 'Price range',
-      parent: rangePrice,
     });
-    createNode({
-      tag: 'input',
-      classes: ['range__selector'],
-      atributesAndValues: [
-        ['id', 'price'],
-        ['type', 'range'],
-      ],
-      parent: rangePrice,
-    });
-    const rangePriceValues = createNode({ tag: 'span', classes: ['range__values'], parent: rangePrice });
-    createNode({
-      tag: 'span',
-      classes: ['range__min'],
-      text: `$${minPrice(books).toFixed(2)}`,
-      parent: rangePriceValues,
-    });
-    createNode({
-      tag: 'span',
-      classes: ['range__max'],
-      text: `$${maxPrice(books).toFixed(2)}`,
-      parent: rangePriceValues,
-    });
-
-    const rangeAmount = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
-    createNode({
-      tag: 'label',
+    const rangePrice = new Slider(
+      minPrice,
+      maxPrice,
+      books,
+      0.01,
+      'priceRangeMin',
+      'priceRangeMax',
+      this.changeHandler,
+      'Price'
+    );
+    const rangeAmountTitle = createNode({
+      tag: 'div',
       classes: ['range__title'],
-      atributesAndValues: [['for', 'count']],
       text: 'Amount in shop range',
-      parent: rangeAmount,
     });
-    createNode({
-      tag: 'input',
-      classes: ['range__selector'],
-      atributesAndValues: [
-        ['id', 'count'],
-        ['type', 'range'],
-      ],
-      parent: rangeAmount,
-    });
-    const rangeAmountValues = createNode({ tag: 'span', classes: ['range__values'], parent: rangeAmount });
-    createNode({ tag: 'span', classes: ['range__min'], text: minAmount(books).toString(), parent: rangeAmountValues });
-    createNode({ tag: 'span', classes: ['range__max'], text: maxAmount(books).toString(), parent: rangeAmountValues });
+    const rangeAmount = new Slider(
+      minAmount,
+      maxAmount,
+      books,
+      1,
+      'countRangeMin',
+      'countRangeMax',
+      this.changeHandler,
+      'Amount'
+    );
+
+    filtersRanges.append(rangePriceTitle, rangePrice.drawSlider(), rangeAmountTitle, rangeAmount.drawSlider());
 
     const filtersFooter = createNode({ tag: 'footer', classes: ['filters__footer'], parent: form });
     createNode({

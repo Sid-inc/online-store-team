@@ -47,12 +47,19 @@ function filterByCategories(arr: Book[], setting: SettingsForSort) {
     return arr.filter((book) => setting.categorySort.includes(book.category));
   }
 }
+function filterByPrice(arr: Book[], setting: SettingsForSort) {
+  return arr.filter((book) => book.price >= setting.priceRangeMin && book.price <= setting.priceRangeMax);
+}
+function filterByAmount(arr: Book[], setting: SettingsForSort) {
+  return arr.filter((book) => book.amount >= setting.countRangeMin && book.amount <= setting.countRangeMax);
+}
 
 export function getBooks(arr: Book[], settingsForSort: SettingsForSort) {
   let booksBySearch = searchBooks(arr, settingsForSort);
   getSortValue(booksBySearch, settingsForSort);
   booksBySearch = filterByAythor(booksBySearch, settingsForSort);
   booksBySearch = filterByCategories(booksBySearch, settingsForSort);
-
+  booksBySearch = filterByPrice(booksBySearch, settingsForSort);
+  booksBySearch = filterByAmount(booksBySearch, settingsForSort);
   return booksBySearch;
 }

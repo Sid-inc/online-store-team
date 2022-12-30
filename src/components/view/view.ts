@@ -23,7 +23,7 @@ export class View {
     this.promo.draw();
     const booksForDrow = getBooks(books, settingsForSort);
     this.main.draw();
-    this.main.drawCataog(booksForDrow);
+    this.main.drawCatalog(booksForDrow);
     this.footer.draw();
   }
   changeHandler: ChangeHandler = (action, value) => {
@@ -50,12 +50,29 @@ export class View {
           const index: number = settingsForSort.authorSort.indexOf(value);
           settingsForSort.authorSort.splice(index, 1);
         }
-
         break;
+
+      case 'addMinPrice':
+        settingsForSort.priceRangeMin = +value.split(';')[0];
+        break;
+
+      case 'addMaxPrice':
+        settingsForSort.priceRangeMax = +value.split(';')[1];
+        break;
+      case 'addMinAmount':
+        settingsForSort.countRangeMin = +value.split(';')[0];
+        break;
+
+      case 'addMaxAmount':
+        settingsForSort.countRangeMax = +value.split(';')[1];
+        break;
+
       default:
         break;
     }
     const booksForDrow = getBooks(books, settingsForSort);
-    this.main.drawCataog(booksForDrow);
+    console.log(settingsForSort);
+
+    this.main.drawCatalog(booksForDrow);
   };
 }
