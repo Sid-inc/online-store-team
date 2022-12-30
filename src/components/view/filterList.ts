@@ -1,17 +1,26 @@
-import { Book, ChangeHandler } from '../../interfaces';
+import { Book, ChangeHandler, SettingsForSort } from '../../interfaces';
 import { createNode } from '../utils/createNode';
 import { countKeys } from '../utils/countDescription';
 import { toggleActiveClass } from '../utils/toggleActiveClass';
+import { getBooks } from '../utils/sortingAndFiltering';
+import { books, settingsForSort } from '../constants/constants';
 
 export class FilterList {
   product: Book[];
   key: keyof Pick<Book, 'author' | 'category'>;
   changeHandler: ChangeHandler;
+  settings: SettingsForSort;
 
-  constructor(product: Book[], key: keyof Pick<Book, 'author' | 'category'>, changeHandler: ChangeHandler) {
+  constructor(
+    product: Book[],
+    key: keyof Pick<Book, 'author' | 'category'>,
+    changeHandler: ChangeHandler,
+    settings: SettingsForSort
+  ) {
     this.product = product;
     this.key = key;
     this.changeHandler = changeHandler;
+    this.settings = settings;
   }
 
   drow() {
@@ -40,8 +49,18 @@ export class FilterList {
         parent: li,
       });
 
-      createNode({ tag: 'span', classes: ['categories-item__name'], text: category[0], parent: button });
-      createNode({ tag: 'span', classes: ['categories-item__count'], text: `(${category[1]})`, parent: button });
+      const span = createNode({ tag: 'span', classes: ['categories-item__name'], text: category[0], parent: button });
+      createNode({
+        tag: 'span',
+        classes: ['categories-item__count'],
+        text: `(${getBooks(books, settingsForSort).filter((book) => book[this.key] === category[0]).length}/${
+          category[1]
+        })`,
+        parent: button,
+      });
+      if (this.settings[`${this.key}Sort`].includes(span.innerText)) {
+        button.classList.add('categories-item__action--active');
+      }
       button.addEventListener('click', () => {
         this.changeHandler(`add${this.key}`, button.childNodes[0].textContent as string);
         toggleActiveClass(button);

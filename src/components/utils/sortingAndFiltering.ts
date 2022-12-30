@@ -2,7 +2,6 @@ import { Book, SettingsForSort } from '../../interfaces';
 
 function searchBooks(arr: Book[], setting: SettingsForSort) {
   const val: string = setting.searchValue.toUpperCase();
-  console.log(val);
 
   if (val === '') {
     return arr;
@@ -35,7 +34,6 @@ function getSortValue(arr: Book[], setting: SettingsForSort) {
 }
 
 function filterByAythor(arr: Book[], setting: SettingsForSort) {
-  console.log(`setting.authorSort - ${setting.authorSort}`);
   if (setting.authorSort.length === 0) {
     return arr;
   } else {
@@ -43,12 +41,17 @@ function filterByAythor(arr: Book[], setting: SettingsForSort) {
   }
 }
 function filterByCategories(arr: Book[], setting: SettingsForSort) {
-  console.log(`setting.category - ${setting.categorySort}`);
   if (setting.categorySort.length === 0) {
     return arr;
   } else {
     return arr.filter((book) => setting.categorySort.includes(book.category));
   }
+}
+function filterByPrice(arr: Book[], setting: SettingsForSort) {
+  return arr.filter((book) => book.price >= setting.priceRangeMin && book.price <= setting.priceRangeMax);
+}
+function filterByAmount(arr: Book[], setting: SettingsForSort) {
+  return arr.filter((book) => book.amount >= setting.countRangeMin && book.amount <= setting.countRangeMax);
 }
 
 export function getBooks(arr: Book[], settingsForSort: SettingsForSort) {
@@ -56,7 +59,7 @@ export function getBooks(arr: Book[], settingsForSort: SettingsForSort) {
   getSortValue(booksBySearch, settingsForSort);
   booksBySearch = filterByAythor(booksBySearch, settingsForSort);
   booksBySearch = filterByCategories(booksBySearch, settingsForSort);
-  console.log(booksBySearch);
-
+  booksBySearch = filterByPrice(booksBySearch, settingsForSort);
+  booksBySearch = filterByAmount(booksBySearch, settingsForSort);
   return booksBySearch;
 }

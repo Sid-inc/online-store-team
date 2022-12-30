@@ -1,112 +1,101 @@
 import { Book, ChangeHandler } from '../../interfaces';
-import { books } from '../constants/constants';
+import { books, settingsForSort } from '../constants/constants';
 import { createNode } from '../utils/createNode';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
+import { getBooks } from '../utils/sortingAndFiltering';
 import { Card } from './card';
 import { FilterList } from './filterList';
 import { Search } from './search';
+import { Slider } from './slider';
 import { Sort } from './sort';
 
 export class Main {
+  main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
   catalogList: HTMLElement | null = null;
   catalogContainer: HTMLElement | null = null;
   filterListByCategories: FilterList;
   filterListByAuthors: FilterList;
   changeHandler: ChangeHandler;
+
   constructor(changeHandler: ChangeHandler) {
     this.changeHandler = changeHandler;
-    this.filterListByCategories = new FilterList(books, 'category', changeHandler);
-    this.filterListByAuthors = new FilterList(books, 'author', changeHandler);
+    this.filterListByCategories = new FilterList(books, 'category', changeHandler, settingsForSort);
+    this.filterListByAuthors = new FilterList(books, 'author', changeHandler, settingsForSort);
   }
 
-  draw(products: Book[]) {
-    const main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
-    this.catalogContainer = createNode({ tag: 'div', classes: ['catalog__inner', 'container'], parent: main });
-    this.catalogContainer.append(this.drawCatalogFilters());
-    this.drawCatalogList(products);
-
-    document.body.append(main);
-    const promo = createNode({ tag: 'div', classes: ['promo'] });
-    const promoContainer = createNode({ tag: 'div', classes: ['promo__inner', 'container'], parent: promo });
-    createNode({
-      tag: 'a',
-      classes: ['promo__link'],
-      atributesAndValues: [['href', '#shop']],
-      text: 'Shop now',
-      parent: promoContainer,
+  draw() {
+    const searhAndSortContainer = createNode({
+      tag: 'div',
+      classes: ['catalog__inner', 'container'],
+      parent: this.main,
     });
-    main.before(promo);
-  }
-  drawCatalogFilters() {
-    const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
-    const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
     const search = new Search(this.changeHandler);
     const sort = new Sort(this.changeHandler);
-    form.append(search.drow(), sort.drow(), this.filterListByCategories.drow(), this.filterListByAuthors.drow());
+    searhAndSortContainer.append(search.drow(), sort.drow());
+  }
+
+  drawCatalog(products: Book[]) {
+    if (this.catalogContainer) {
+      this.catalogContainer.remove();
+    }
+    this.catalogContainer = createNode({ tag: 'div', classes: ['catalog__inner', 'container'], parent: this.main });
+    this.catalogContainer.append(this.drawCatalogFilters(), this.drawCatalogList(products));
+    const footer = document.querySelector('footer') as HTMLElement;
+    if (!footer) {
+      document.body.append(this.main);
+    } else {
+      footer.before(this.main);
+    }
+  }
+
+  drawCatalogFilters() {
+    console.log(settingsForSort);
+
+    const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
+    const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
+    const searchText = createNode({
+      tag: 'span',
+      classes: ['search__text'],
+      text: `${getBooks(books, settingsForSort).length} books found`,
+    });
+    form.append(searchText, this.filterListByCategories.drow(), this.filterListByAuthors.drow());
 
     const filtersRanges = createNode({ tag: 'fieldset', classes: ['filters__ranges'], parent: form });
-    // noUiSlider.create(filtersRanges, {
-    //   start: [20, 80],
-    //   connect: true,
-    //   range: {
-    //     min: 0,
-    //     max: 100,
-    //   },
-    // });
-    const rangePrice = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
-    createNode({
-      tag: 'label',
+    const rangePriceTitle = createNode({
+      tag: 'div',
       classes: ['range__title'],
-      atributesAndValues: [['for', 'price']],
       text: 'Price range',
-      parent: rangePrice,
     });
-    createNode({
-      tag: 'input',
-      classes: ['range__selector'],
-      atributesAndValues: [
-        ['id', 'price'],
-        ['type', 'range'],
-      ],
-      parent: rangePrice,
-    });
-    const rangePriceValues = createNode({ tag: 'span', classes: ['range__values'], parent: rangePrice });
-    createNode({
-      tag: 'span',
-      classes: ['range__min'],
-      text: `$${minPrice(books).toFixed(2)}`,
-      parent: rangePriceValues,
-    });
-    createNode({
-      tag: 'span',
-      classes: ['range__max'],
-      text: `$${maxPrice(books).toFixed(2)}`,
-      parent: rangePriceValues,
-    });
-
-    const rangeAmount = createNode({ tag: 'div', classes: ['range'], parent: filtersRanges });
-    createNode({
-      tag: 'label',
+    const rangePrice = new Slider(
+      minPrice,
+      maxPrice,
+      books,
+      0.01,
+      'priceRangeMin',
+      'priceRangeMax',
+      this.changeHandler,
+      'Price'
+    );
+    const rangeAmountTitle = createNode({
+      tag: 'div',
       classes: ['range__title'],
-      atributesAndValues: [['for', 'count']],
       text: 'Amount in shop range',
-      parent: rangeAmount,
     });
-    createNode({
-      tag: 'input',
-      classes: ['range__selector'],
-      atributesAndValues: [
-        ['id', 'count'],
-        ['type', 'range'],
-      ],
-      parent: rangeAmount,
-    });
-    const rangeAmountValues = createNode({ tag: 'span', classes: ['range__values'], parent: rangeAmount });
-    createNode({ tag: 'span', classes: ['range__min'], text: minAmount(books).toString(), parent: rangeAmountValues });
-    createNode({ tag: 'span', classes: ['range__max'], text: maxAmount(books).toString(), parent: rangeAmountValues });
+    const rangeAmount = new Slider(
+      minAmount,
+      maxAmount,
+      books,
+      1,
+      'countRangeMin',
+      'countRangeMax',
+      this.changeHandler,
+      'Amount'
+    );
+
+    filtersRanges.append(rangePriceTitle, rangePrice.drawSlider(), rangeAmountTitle, rangeAmount.drawSlider());
 
     const filtersFooter = createNode({ tag: 'footer', classes: ['filters__footer'], parent: form });
-    createNode({
+    const buttonClean = createNode({
       tag: 'button',
       classes: ['button', 'button--primary'],
       text: 'Clean',
@@ -116,9 +105,12 @@ export class Main {
     createNode({
       tag: 'button',
       classes: ['button'],
-      text: 'Cope',
+      text: 'Copy',
       atributesAndValues: [['type', 'button']],
       parent: filtersFooter,
+    });
+    buttonClean.addEventListener('click', () => {
+      this.changeHandler('cleanSettings', '');
     });
 
     return catalogFilters;
@@ -135,8 +127,6 @@ export class Main {
         this.catalogList.append(card.getCardElement());
       }
     });
-    if (this.catalogContainer) {
-      this.catalogContainer.append(this.catalogList);
-    }
+    return this.catalogList;
   }
 }

@@ -1,7 +1,6 @@
-// import { settingsForSort } from '../constants/constants';
 import { ChangeHandler } from '../../interfaces';
+import { settingsForSort } from '../constants/constants';
 import { createNode } from '../utils/createNode';
-// import { getBooks } from '../utils/sort';
 
 export class Search {
   changeHandler: ChangeHandler;
@@ -17,6 +16,7 @@ export class Search {
       atributesAndValues: [
         ['type', 'text'],
         ['placeholder', 'Search'],
+        ['value', settingsForSort.searchValue],
       ],
     }) as HTMLInputElement;
     const searchButton = createNode({
@@ -27,9 +27,8 @@ export class Search {
         ['aria-label', 'clean'],
       ],
     });
-
-    const searchText = createNode({ tag: 'span', classes: ['search__text'], text: '0 products found' });
-    search.append(searchInput, searchButton, searchText);
+    searchInput.focus();
+    search.append(searchInput, searchButton);
     searchInput.addEventListener('input', () => {
       this.changeHandler('setSearchValue', searchInput.value);
     });

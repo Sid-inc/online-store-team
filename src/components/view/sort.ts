@@ -32,6 +32,7 @@ export class Sort {
       atributesAndValues: [['value', 'rdsc']],
       text: 'Rating dsc',
     });
+
     sort.append(optionPasc, optionPdsc, optionRasc, optionRdsc);
     sort.addEventListener('change', () => {
       this.changeHandler('addFiltersSort', sort.value);
