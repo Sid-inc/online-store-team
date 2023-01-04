@@ -18,14 +18,25 @@ export interface Book {
 }
 
 export interface SettingsForSort {
-  searchValue: string;
-  filtersSort: string;
-  categorySort: string[];
-  authorSort: string[];
-  priceRangeMin: number;
-  priceRangeMax: number;
-  countRangeMin: number;
-  countRangeMax: number;
+  search: string;
+  sort: string;
+  category: string[];
+  author: string[];
+  priceMin: number;
+  priceMax: number;
+  countMin: number;
+  countMax: number;
+}
+
+export interface Queries {
+  search?: string;
+  sort?: string;
+  category?: string[];
+  author?: string[];
+  priceMin?: string;
+  priceMax?: string;
+  countMin?: string;
+  countMax?: string;
 }
 
 export type ChangeHandler = (action: string, value: string) => void;

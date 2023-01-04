@@ -49,8 +49,6 @@ export class Main {
   }
 
   drawCatalogFilters() {
-    console.log(settingsForSort);
-
     const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
     const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
     const searchText = createNode({
@@ -66,16 +64,7 @@ export class Main {
       classes: ['range__title'],
       text: 'Price range',
     });
-    const rangePrice = new Slider(
-      minPrice,
-      maxPrice,
-      books,
-      0.01,
-      'priceRangeMin',
-      'priceRangeMax',
-      this.changeHandler,
-      'Price'
-    );
+    const rangePrice = new Slider(minPrice, maxPrice, books, 0.01, 'priceMin', 'priceMax', this.changeHandler, 'Price');
     const rangeAmountTitle = createNode({
       tag: 'div',
       classes: ['range__title'],
@@ -86,8 +75,8 @@ export class Main {
       maxAmount,
       books,
       1,
-      'countRangeMin',
-      'countRangeMax',
+      'countMin',
+      'countMax',
       this.changeHandler,
       'Amount'
     );

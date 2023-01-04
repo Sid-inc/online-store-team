@@ -10,8 +10,8 @@ export class Slider {
   min: MaxAndMin;
   products: Book[];
   step: number;
-  key1: keyof Pick<SettingsForSort, 'priceRangeMin' | 'countRangeMin'>;
-  key2: keyof Pick<SettingsForSort, 'priceRangeMax' | 'countRangeMax'>;
+  key1: keyof Pick<SettingsForSort, 'priceMin' | 'countMin'>;
+  key2: keyof Pick<SettingsForSort, 'priceMax' | 'countMax'>;
   changeHandler: ChangeHandler;
   name: string;
 
@@ -20,8 +20,8 @@ export class Slider {
     max: MaxAndMin,
     products: Book[],
     step: number,
-    key1: keyof Pick<SettingsForSort, 'priceRangeMin' | 'countRangeMin'>,
-    key2: keyof Pick<SettingsForSort, 'priceRangeMax' | 'countRangeMax'>,
+    key1: keyof Pick<SettingsForSort, 'priceMin' | 'countMin'>,
+    key2: keyof Pick<SettingsForSort, 'priceMax' | 'countMax'>,
     changeHandler: ChangeHandler,
     name: string
   ) {

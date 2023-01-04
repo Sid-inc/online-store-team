@@ -35,7 +35,7 @@ export class Sort {
 
     sort.append(optionPasc, optionPdsc, optionRasc, optionRdsc);
     sort.addEventListener('change', () => {
-      this.changeHandler('addFiltersSort', sort.value);
+      this.changeHandler('sort', sort.value);
     });
     return sort;
   }

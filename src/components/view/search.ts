@@ -16,7 +16,7 @@ export class Search {
       atributesAndValues: [
         ['type', 'text'],
         ['placeholder', 'Search'],
-        ['value', settingsForSort.searchValue],
+        ['value', settingsForSort.search],
       ],
     }) as HTMLInputElement;
     const searchButton = createNode({
