@@ -50,3 +50,39 @@ export function searchParams() {
 export function cleanSearchParams() {
   history.pushState(null, '', location.href.split('?')[0]);
 }
+
+export function getSearchParams() {
+  const url: URL = new URL(window.location.href);
+  if (url.search) {
+    for (const [name, value] of url.searchParams) {
+      if (name === 'search') {
+        settingsForSort.sort = value;
+        console.log(settingsForSort.sort);
+      }
+      if (name === 'sort') {
+        settingsForSort.sort = value;
+      }
+      if (name === 'category') {
+        value.split(',').forEach((el) => settingsForSort.category.push(el));
+      }
+      if (name === 'author') {
+        value.split(',').forEach((el) => settingsForSort.author.push(el));
+      }
+      if (name === 'priceMin') {
+        settingsForSort.priceMin = +value;
+      }
+      if (name === 'priceMax') {
+        settingsForSort.priceMax = +value;
+      }
+      if (name === 'countMin') {
+        settingsForSort.countMin = +value;
+      }
+      if (name === 'countMax') {
+        settingsForSort.countMax = +value;
+      }
+    }
+  } else {
+    console.log('searcha нет');
+  }
+  console.log(settingsForSort);
+}

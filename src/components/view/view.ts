@@ -1,7 +1,7 @@
 import { ChangeHandler } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
-import { cleanSearchParams, searchParams } from '../utils/searchParams';
+import { cleanSearchParams, getSearchParams, searchParams } from '../utils/searchParams';
 import { getBooks } from '../utils/sortingAndFiltering';
 import { Footer } from './footer';
 import { Header } from './header';
@@ -24,6 +24,7 @@ export class View {
   drawApp() {
     this.header.draw();
     this.promo.draw();
+    getSearchParams();
     const booksForDrow = getBooks(books, settingsForSort);
     this.main.draw();
     this.main.drawCatalog(booksForDrow);
