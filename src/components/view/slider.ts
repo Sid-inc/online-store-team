@@ -1,4 +1,4 @@
-import noUiSlider from 'nouislider';
+import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { Book, MaxAndMin, SettingsForSort } from '../../interfaces';
 import { createNode } from '../utils/createNode';
@@ -52,7 +52,7 @@ export class Slider {
         },
       },
     });
-    (slider as noUiSlider.target).noUiSlider.on('change', (values: number[], handle: number) => {
+    (slider as noUiSlider.target).noUiSlider?.on('change', (values: (string | number)[], handle: number) => {
       const valuesToString = values.join(';');
       if (!handle) {
         this.changeHandler(`addMin${this.name}`, valuesToString);
