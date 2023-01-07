@@ -833,14 +833,14 @@ export const books: Book[] = [
 ];
 
 export const settingsForSort: SettingsForSort = {
-  searchValue: '',
-  filtersSort: 'pasc',
-  categorySort: [],
-  authorSort: [],
-  priceRangeMin: minPrice(books),
-  priceRangeMax: maxPrice(books),
-  countRangeMin: minAmount(books),
-  countRangeMax: maxAmount(books),
+  search: '',
+  sort: 'pasc',
+  category: [],
+  author: [],
+  priceMin: minPrice(books),
+  priceMax: maxPrice(books),
+  countMin: minAmount(books),
+  countMax: maxAmount(books),
 };
 
 export const settingsForPagination: SettingsForPagination = {

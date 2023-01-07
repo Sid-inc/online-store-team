@@ -1,6 +1,7 @@
 import { ChangeHandler } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
+import { cleanSearchParams, getSearchParams, searchParams } from '../utils/searchParams';
 import { getBooks } from '../utils/sortingAndFiltering';
 import { Cart } from './cart';
 import { Footer } from './footer';
@@ -14,6 +15,7 @@ export class View {
   main: Main;
   promo: Promo;
   cart: Cart;
+  searchInput: HTMLInputElement | null = document.querySelector('.search__field');
   constructor() {
     this.header = new Header();
     this.footer = new Footer();
@@ -25,65 +27,84 @@ export class View {
   drawApp() {
     this.header.draw();
     this.promo.draw();
+    getSearchParams();
     const booksForDrow = getBooks(books, settingsForSort);
-    this.main.draw();
+    this.main.drawSearhAndSortContainer();
     this.main.drawCatalog(booksForDrow);
     // this.cart.draw();
     this.footer.draw();
+    console.log(settingsForSort.search);
   }
   changeHandler: ChangeHandler = (action, value) => {
     switch (action) {
       case 'setSearchValue':
-        settingsForSort.searchValue = value;
-        break;
-      case 'addFiltersSort':
-        settingsForSort.filtersSort = value;
-        break;
-      case 'addcategory':
-        if (!settingsForSort.categorySort.includes(value)) {
-          settingsForSort.categorySort.push(value);
-        } else {
-          const index: number = settingsForSort.categorySort.indexOf(value);
-          settingsForSort.categorySort.splice(index, 1);
-        }
+        settingsForSort.search = value;
+        searchParams();
 
         break;
-      case 'addauthor':
-        if (!settingsForSort.authorSort.includes(value)) {
-          settingsForSort.authorSort.push(value);
+      case 'sort':
+        settingsForSort.sort = value;
+        searchParams();
+
+        break;
+      case 'addcategory':
+        if (!settingsForSort.category.includes(value)) {
+          settingsForSort.category.push(value);
         } else {
-          const index: number = settingsForSort.authorSort.indexOf(value);
-          settingsForSort.authorSort.splice(index, 1);
+          const index: number = settingsForSort.category.indexOf(value);
+          settingsForSort.category.splice(index, 1);
         }
+        searchParams();
+        break;
+      case 'addauthor':
+        if (!settingsForSort.author.includes(value)) {
+          settingsForSort.author.push(value);
+        } else {
+          const index: number = settingsForSort.author.indexOf(value);
+          settingsForSort.author.splice(index, 1);
+        }
+        searchParams();
+
         break;
 
       case 'addMinPrice':
-        settingsForSort.priceRangeMin = +value.split(';')[0];
+        settingsForSort.priceMin = +value.split(';')[0];
+        searchParams();
         break;
 
       case 'addMaxPrice':
-        settingsForSort.priceRangeMax = +value.split(';')[1];
+        settingsForSort.priceMax = +value.split(';')[1];
+        searchParams();
         break;
       case 'addMinAmount':
-        settingsForSort.countRangeMin = +value.split(';')[0];
+        settingsForSort.countMin = +value.split(';')[0];
+        searchParams();
         break;
 
       case 'addMaxAmount':
-        settingsForSort.countRangeMax = +value.split(';')[1];
+        settingsForSort.countMax = +value.split(';')[1];
+        searchParams();
         break;
       case 'cleanSettings':
-        settingsForSort.categorySort = [];
-        settingsForSort.authorSort = [];
-        settingsForSort.priceRangeMin = minPrice(books);
-        settingsForSort.priceRangeMax = maxPrice(books);
-        settingsForSort.countRangeMin = minAmount(books);
-        settingsForSort.countRangeMax = maxAmount(books);
+        console.log(this.searchInput);
+
+        if (this.searchInput) {
+          this.searchInput.remove();
+        }
+        settingsForSort.search = '';
+        settingsForSort.sort = 'pasc';
+        settingsForSort.category = [];
+        settingsForSort.author = [];
+        settingsForSort.priceMin = minPrice(books);
+        settingsForSort.priceMax = maxPrice(books);
+        settingsForSort.countMin = minAmount(books);
+        settingsForSort.countMax = maxAmount(books);
+        cleanSearchParams();
       default:
         break;
     }
     const booksForDrow = getBooks(books, settingsForSort);
-    console.log(settingsForSort);
-
+    this.main.drawSearhAndSortContainer();
     this.main.drawCatalog(booksForDrow);
   };
 }

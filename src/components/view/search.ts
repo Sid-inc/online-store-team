@@ -16,7 +16,7 @@ export class Search {
       atributesAndValues: [
         ['type', 'text'],
         ['placeholder', 'Search'],
-        ['value', settingsForSort.searchValue],
+        ['value', settingsForSort.search],
       ],
     }) as HTMLInputElement;
     const searchButton = createNode({
@@ -27,7 +27,9 @@ export class Search {
         ['aria-label', 'clean'],
       ],
     });
-    searchInput.focus();
+    if (searchInput instanceof HTMLInputElement) {
+      searchInput.focus();
+    }
     search.append(searchInput, searchButton);
     searchInput.addEventListener('input', () => {
       this.changeHandler('setSearchValue', searchInput.value);
