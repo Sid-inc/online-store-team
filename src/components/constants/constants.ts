@@ -1,4 +1,4 @@
-import { Book, Cover, SettingsForSort } from '../../interfaces';
+import { Book, Cover, SettingsForPagination, SettingsForSort } from '../../interfaces';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 
 export const books: Book[] = [
@@ -841,4 +841,12 @@ export const settingsForSort: SettingsForSort = {
   priceMax: maxPrice(books),
   countMin: minAmount(books),
   countMax: maxAmount(books),
+};
+
+export const settingsForPagination: SettingsForPagination = {
+  perPage: 10,
+  perPageMin: 1,
+  perPageMax: 99,
+  pagesCount: 1,
+  currentPage: 1,
 };

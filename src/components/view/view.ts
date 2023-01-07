@@ -3,6 +3,7 @@ import { books, settingsForSort } from '../constants/constants';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 import { cleanSearchParams, getSearchParams, searchParams } from '../utils/searchParams';
 import { getBooks } from '../utils/sortingAndFiltering';
+import { Cart } from './cart';
 import { Footer } from './footer';
 import { Header } from './header';
 import { Main } from './main';
@@ -13,12 +14,14 @@ export class View {
   footer: Footer;
   main: Main;
   promo: Promo;
+  cart: Cart;
   searchInput: HTMLInputElement | null = document.querySelector('.search__field');
   constructor() {
     this.header = new Header();
     this.footer = new Footer();
     this.promo = new Promo();
     this.main = new Main(this.changeHandler);
+    this.cart = new Cart();
   }
 
   drawApp() {
@@ -28,6 +31,7 @@ export class View {
     const booksForDrow = getBooks(books, settingsForSort);
     this.main.drawSearhAndSortContainer();
     this.main.drawCatalog(booksForDrow);
+    // this.cart.draw();
     this.footer.draw();
     console.log(settingsForSort.search);
   }
