@@ -1,5 +1,6 @@
 import { Book, ChangeHandler } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
+import { copyLink } from '../utils/copyLink';
 import { createNode } from '../utils/createNode';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 import { getBooks } from '../utils/sortingAndFiltering';
@@ -100,7 +101,7 @@ export class Main {
       atributesAndValues: [['type', 'button']],
       parent: filtersFooter,
     });
-    createNode({
+    const buttonCopy = createNode({
       tag: 'button',
       classes: ['button'],
       text: 'Copy',
@@ -109,6 +110,10 @@ export class Main {
     });
     buttonClean.addEventListener('click', () => {
       this.changeHandler('cleanSettings', '');
+    });
+    buttonCopy.addEventListener('click', () => {
+      copyLink();
+      buttonCopy.innerText = 'Copied!';
     });
 
     return catalogFilters;

@@ -87,6 +87,8 @@ export class View {
         if (this.searchInput) {
           this.searchInput.remove();
         }
+        settingsForSort.search = '';
+        settingsForSort.sort = 'pasc';
         settingsForSort.category = [];
         settingsForSort.author = [];
         settingsForSort.priceMin = minPrice(books);
