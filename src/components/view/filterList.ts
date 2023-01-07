@@ -58,7 +58,7 @@ export class FilterList {
         })`,
         parent: button,
       });
-      if (this.settings[`${this.key}Sort`].includes(span.innerText)) {
+      if (this.settings[this.key].includes(span.innerText)) {
         button.classList.add('categories-item__action--active');
       }
       button.addEventListener('click', () => {

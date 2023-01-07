@@ -4,7 +4,7 @@ export function createNode(obj: {
   text?: string;
   atributesAndValues?: [string, string][];
   parent?: HTMLElement;
-}): HTMLElement | HTMLInputElement {
+}): HTMLElement | HTMLInputElement | HTMLOptionElement {
   const node: HTMLElement = document.createElement(obj.tag);
   if (obj.classes) {
     node.classList.add(...obj.classes);

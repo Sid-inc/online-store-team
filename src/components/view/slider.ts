@@ -1,4 +1,4 @@
-import noUiSlider from 'nouislider';
+import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { Book, MaxAndMin, SettingsForSort } from '../../interfaces';
 import { createNode } from '../utils/createNode';
@@ -10,8 +10,8 @@ export class Slider {
   min: MaxAndMin;
   products: Book[];
   step: number;
-  key1: keyof Pick<SettingsForSort, 'priceRangeMin' | 'countRangeMin'>;
-  key2: keyof Pick<SettingsForSort, 'priceRangeMax' | 'countRangeMax'>;
+  key1: keyof Pick<SettingsForSort, 'priceMin' | 'countMin'>;
+  key2: keyof Pick<SettingsForSort, 'priceMax' | 'countMax'>;
   changeHandler: ChangeHandler;
   name: string;
 
@@ -20,8 +20,8 @@ export class Slider {
     max: MaxAndMin,
     products: Book[],
     step: number,
-    key1: keyof Pick<SettingsForSort, 'priceRangeMin' | 'countRangeMin'>,
-    key2: keyof Pick<SettingsForSort, 'priceRangeMax' | 'countRangeMax'>,
+    key1: keyof Pick<SettingsForSort, 'priceMin' | 'countMin'>,
+    key2: keyof Pick<SettingsForSort, 'priceMax' | 'countMax'>,
     changeHandler: ChangeHandler,
     name: string
   ) {
@@ -52,7 +52,7 @@ export class Slider {
         },
       },
     });
-    (slider as noUiSlider.target).noUiSlider.on('change', (values: number[], handle: number) => {
+    (slider as noUiSlider.target).noUiSlider?.on('change', (values: (string | number)[], handle: number) => {
       const valuesToString = values.join(';');
       if (!handle) {
         this.changeHandler(`addMin${this.name}`, valuesToString);
