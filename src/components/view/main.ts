@@ -11,6 +11,7 @@ import { Sort } from './sort';
 
 export class Main {
   main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
+  searhAndSortContainer: HTMLElement | null = null;
   catalogList: HTMLElement | null = null;
   catalogContainer: HTMLElement | null = null;
   filterListByCategories: FilterList;
@@ -23,15 +24,23 @@ export class Main {
     this.filterListByAuthors = new FilterList(books, 'author', changeHandler, settingsForSort);
   }
 
-  draw() {
-    const searhAndSortContainer = createNode({
+  drawSearhAndSortContainer() {
+    if (this.searhAndSortContainer) {
+      this.searhAndSortContainer.remove();
+    }
+    this.searhAndSortContainer = createNode({
       tag: 'div',
       classes: ['catalog__inner', 'container'],
       parent: this.main,
     });
     const search = new Search(this.changeHandler);
-    const sort = new Sort(this.changeHandler);
-    searhAndSortContainer.append(search.drow(), sort.drow());
+    const sort = new Sort(this.changeHandler, settingsForSort);
+    this.searhAndSortContainer.append(search.drow(), sort.drow());
+    const input = document.querySelector('.search__field');
+    if (input instanceof HTMLInputElement) {
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
   }
 
   drawCatalog(products: Book[]) {
@@ -110,12 +119,23 @@ export class Main {
       this.catalogList.remove();
     }
     this.catalogList = createNode({ tag: 'ul', classes: ['catalog__list', 'product-list'] });
-    products.forEach((product) => {
-      const card = new Card(product);
-      if (this.catalogList) {
-        this.catalogList.append(card.getCardElement());
-      }
-    });
+    if (products.length !== 0) {
+      products.forEach((product) => {
+        const card = new Card(product);
+        if (this.catalogList) {
+          this.catalogList.append(card.getCardElement());
+        }
+      });
+    } else {
+      this.catalogList.classList.add('product__list_no-found');
+      createNode({
+        tag: 'span',
+        classes: ['catalog__list_text'],
+        text: 'No books found... <br> Please change your search settings.',
+        parent: this.catalogList,
+      });
+    }
+
     return this.catalogList;
   }
 }

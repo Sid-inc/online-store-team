@@ -56,8 +56,7 @@ export function getSearchParams() {
   if (url.search) {
     for (const [name, value] of url.searchParams) {
       if (name === 'search') {
-        settingsForSort.sort = value;
-        console.log(settingsForSort.sort);
+        settingsForSort.search = value;
       }
       if (name === 'sort') {
         settingsForSort.sort = value;
@@ -81,8 +80,5 @@ export function getSearchParams() {
         settingsForSort.countMax = +value;
       }
     }
-  } else {
-    console.log('searcha нет');
   }
-  console.log(settingsForSort);
 }

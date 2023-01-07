@@ -26,9 +26,10 @@ export class View {
     this.promo.draw();
     getSearchParams();
     const booksForDrow = getBooks(books, settingsForSort);
-    this.main.draw();
+    this.main.drawSearhAndSortContainer();
     this.main.drawCatalog(booksForDrow);
     this.footer.draw();
+    console.log(settingsForSort.search);
   }
   changeHandler: ChangeHandler = (action, value) => {
     switch (action) {
@@ -97,6 +98,7 @@ export class View {
         break;
     }
     const booksForDrow = getBooks(books, settingsForSort);
+    this.main.drawSearhAndSortContainer();
     this.main.drawCatalog(booksForDrow);
   };
 }

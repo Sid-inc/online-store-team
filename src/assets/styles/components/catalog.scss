@@ -260,6 +260,16 @@
   }
 }
 
+.product__list_no-found {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.catalog__list_text {
+  margin-top: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
 .product {
   width: 264px;
 }
