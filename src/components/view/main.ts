@@ -136,7 +136,7 @@ export class Main {
       createNode({
         tag: 'span',
         classes: ['catalog__list_text'],
-        text: 'No books found... <br> Please change your search settings.',
+        text: 'No books found... <br> Please, change your search settings.',
         parent: this.catalogList,
       });
     }
