@@ -24,11 +24,11 @@ export class View {
 
   drawApp() {
     this.header.draw();
-    // this.promo.draw();
-    // const booksForDrow = getBooks(books, settingsForSort);
-    // this.main.draw();
-    // this.main.drawCatalog(booksForDrow);
-    this.cart.draw();
+    this.promo.draw();
+    const booksForDrow = getBooks(books, settingsForSort);
+    this.main.draw();
+    this.main.drawCatalog(booksForDrow);
+    // this.cart.draw();
     this.footer.draw();
   }
   changeHandler: ChangeHandler = (action, value) => {

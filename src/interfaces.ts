@@ -28,5 +28,19 @@ export interface SettingsForSort {
   countRangeMax: number;
 }
 
+export interface SettingsForPagination {
+  perPage: number;
+  perPageMin: number;
+  perPageMax: number;
+  pagesCount: number;
+  currentPage: number;
+}
+
 export type ChangeHandler = (action: string, value: string) => void;
 export type MaxAndMin = (arr: Book[]) => number;
+
+export interface CartItem {
+  id: number;
+  count: number;
+  price: number;
+}

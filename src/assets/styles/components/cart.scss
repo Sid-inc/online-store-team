@@ -23,6 +23,8 @@
 }
 
 .cart-list__title {
+  font-size: 18px;
+  font-weight: 600;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -71,6 +73,7 @@
 .cart-list__inner {
   list-style: none;
   display: flex;
+  min-height: 360px;
   flex-direction: column;
   padding-left: 0;
   margin-top: 0;
