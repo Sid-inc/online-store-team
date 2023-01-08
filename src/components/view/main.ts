@@ -42,6 +42,35 @@ export class Main {
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
     }
+    const viewButtons = createNode({
+      tag: 'div',
+      classes: ['view-buttons'],
+      parent: this.searhAndSortContainer,
+    });
+    const shortView = createNode({
+      tag: 'button',
+      classes: ['view-button', 'view-buttons-active'],
+      text: 'short view',
+      parent: viewButtons,
+    });
+    const fullView = createNode({ tag: 'button', classes: ['view-button'], text: 'full view', parent: viewButtons });
+    viewButtons.addEventListener('click', (e) => {
+      if (e.target instanceof HTMLElement) {
+        if (e.target === shortView) {
+          if (this.catalogList) {
+            shortView.classList.add('view-buttons-active');
+            fullView.classList.remove('view-buttons-active');
+            this.catalogList.classList.add('product__list_short');
+          }
+        } else {
+          if (this.catalogList) {
+            shortView.classList.remove('view-buttons-active');
+            fullView.classList.add('view-buttons-active');
+            this.catalogList.classList.remove('product__list_short');
+          }
+        }
+      }
+    });
   }
 
   drawCatalog(products: Book[]) {
@@ -91,7 +120,7 @@ export class Main {
       'Amount'
     );
 
-    filtersRanges.append(rangePriceTitle, rangePrice.drawSlider(), rangeAmountTitle, rangeAmount.drawSlider());
+    filtersRanges.append(rangePriceTitle, rangePrice.drawSlider(2), rangeAmountTitle, rangeAmount.drawSlider(0));
 
     const filtersFooter = createNode({ tag: 'footer', classes: ['filters__footer'], parent: form });
     const buttonClean = createNode({

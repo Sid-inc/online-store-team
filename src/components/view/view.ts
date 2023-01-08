@@ -33,7 +33,6 @@ export class View {
     this.main.drawCatalog(booksForDrow);
     // this.cart.draw();
     this.footer.draw();
-    console.log(settingsForSort.search);
   }
   changeHandler: ChangeHandler = (action, value) => {
     switch (action) {
