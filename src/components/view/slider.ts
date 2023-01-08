@@ -34,7 +34,7 @@ export class Slider {
     this.changeHandler = changeHandler;
     this.name = name;
   }
-  drawSlider() {
+  drawSlider(n: number) {
     const slider = createNode({ tag: 'div', classes: ['slider-container'] });
 
     noUiSlider.create(slider, {
@@ -48,7 +48,7 @@ export class Slider {
 
       tooltips: {
         to: function (numericValue: number): string {
-          return numericValue.toFixed(2);
+          return numericValue.toFixed(n);
         },
       },
     });

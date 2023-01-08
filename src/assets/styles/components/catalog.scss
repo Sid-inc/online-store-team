@@ -114,6 +114,20 @@
   text-align: center;
 }
 
+.view-buttons {
+  display: flex;
+  gap: 15px
+}
+
+.view-button {
+  min-width: 135px;
+  padding: 15px 0;
+  border-radius: 10px;
+}
+
+.view-buttons-active {
+  border-color: red;
+}
 .sort {
   display: block;
   height: 40px;
