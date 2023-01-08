@@ -1,6 +1,10 @@
 import { createNode } from '../utils/createNode';
 
 export class Header {
+  id: string;
+  constructor(id: string) {
+    this.id = id;
+  }
   draw() {
     const header = createNode({ tag: 'header', classes: ['header'] });
     const headerContainer = createNode({ tag: 'div', classes: ['header__inner', 'container'], parent: header });
@@ -16,7 +20,7 @@ export class Header {
       tag: 'a',
       classes: ['header__cart', 'cart'],
       atributesAndValues: [
-        ['href', './cart.html'],
+        ['href', `#${this.id}`],
         ['aria-label', 'Cart'],
       ],
       parent: headerContainer,

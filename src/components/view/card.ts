@@ -11,7 +11,7 @@ export class Card {
     const itemLink = createNode({
       tag: 'a',
       classes: ['product__link'],
-      atributesAndValues: [['href', `./products.html?id=${this.product.id}`]],
+      atributesAndValues: [['href', `#book${this.product.id}`]],
       parent: itemCard,
     });
     const itemImage = createNode({

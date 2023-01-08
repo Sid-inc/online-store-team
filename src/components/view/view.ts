@@ -1,12 +1,13 @@
 import { ChangeHandler } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
-import { cleanSearchParams, getSearchParams, searchParams } from '../utils/searchParams';
+import { cleanSearchParams, searchParams, getSearchParams } from '../utils/searchParams';
 import { getBooks } from '../utils/sortingAndFiltering';
 import { Cart } from './cart';
 import { Footer } from './footer';
 import { Header } from './header';
 import { Main } from './main';
+import { Product } from './product';
 import { Promo } from './promo';
 
 export class View {
@@ -17,23 +18,22 @@ export class View {
   cart: Cart;
   searchInput: HTMLInputElement | null = document.querySelector('.search__field');
   constructor() {
-    this.header = new Header();
+    this.header = new Header('cart');
     this.footer = new Footer();
     this.promo = new Promo();
     this.main = new Main(this.changeHandler);
-    this.cart = new Cart();
+    this.cart = new Cart('cart');
   }
 
   drawApp() {
     this.header.draw();
     this.promo.draw();
     getSearchParams();
-    const booksForDrow = getBooks(books, settingsForSort);
-    this.main.drawSearhAndSortContainer();
-    this.main.drawCatalog(booksForDrow);
-    // this.cart.draw();
+    this.renderNewPage('');
+    this.enableRouteChange();
     this.footer.draw();
   }
+
   changeHandler: ChangeHandler = (action, value) => {
     switch (action) {
       case 'setSearchValue':
@@ -58,11 +58,14 @@ export class View {
       case 'addauthor':
         if (!settingsForSort.author.includes(value)) {
           settingsForSort.author.push(value);
+          console.log('добавилось значение' + `    settingsForSort.author - ${settingsForSort.author}`);
+
+          searchParams();
         } else {
           const index: number = settingsForSort.author.indexOf(value);
           settingsForSort.author.splice(index, 1);
+          searchParams();
         }
-        searchParams();
 
         break;
 
@@ -85,8 +88,6 @@ export class View {
         searchParams();
         break;
       case 'cleanSettings':
-        console.log(this.searchInput);
-
         if (this.searchInput) {
           this.searchInput.remove();
         }
@@ -102,8 +103,38 @@ export class View {
       default:
         break;
     }
-    const booksForDrow = getBooks(books, settingsForSort);
-    this.main.drawSearhAndSortContainer();
-    this.main.drawCatalog(booksForDrow);
+    this.renderNewPage('');
   };
+
+  renderNewPage(idPage: string) {
+    const currentPage = document.querySelector('main');
+    if (currentPage) {
+      currentPage.remove();
+    }
+    let page: Main | Cart | Product | null = null;
+    if (idPage === '') {
+      page = this.main;
+      const booksForDrow = getBooks(books, settingsForSort);
+      page.drawSearhAndSortContainer();
+      page.drawCatalog(booksForDrow);
+    } else if (idPage === 'cart') {
+      page = new Cart('cart');
+      page.draw();
+    } else if (idPage === `book${idPage.slice(4)}`) {
+      page = new Product(books);
+      const footer = document.querySelector('footer') as HTMLElement;
+      if (!footer) {
+        document.body.append(page.draw());
+      } else {
+        footer.before(page.draw());
+      }
+    }
+  }
+
+  private enableRouteChange() {
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.slice(1);
+      this.renderNewPage(hash);
+    });
+  }
 }

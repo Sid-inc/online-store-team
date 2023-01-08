@@ -39,7 +39,6 @@ export class Main {
     this.searhAndSortContainer.append(search.drow(), sort.drow());
     const input = document.querySelector('.search__field');
     if (input instanceof HTMLInputElement) {
-      input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
     }
     const viewButtons = createNode({
@@ -71,6 +70,7 @@ export class Main {
         }
       }
     });
+    // return this.searhAndSortContainer;
   }
 
   drawCatalog(products: Book[]) {
@@ -85,6 +85,7 @@ export class Main {
     } else {
       footer.before(this.main);
     }
+    return this.catalogContainer;
   }
 
   drawCatalogFilters() {
@@ -169,7 +170,10 @@ export class Main {
         parent: this.catalogList,
       });
     }
-
     return this.catalogList;
   }
+  // draw(products: Book[]) {
+  //   this.main.append(this.drawCatalog(products));
+  //   return this.main;
+  // }
 }

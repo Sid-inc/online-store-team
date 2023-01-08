@@ -9,6 +9,11 @@ export class Cart {
   private storage = new BookStorage();
   private cartListContainer?: HTMLElement;
   private cartList?: CartItem[];
+  id: string;
+
+  constructor(id: string) {
+    this.id = id;
+  }
 
   draw(): void {
     const cartPage = createNode({ tag: 'main', classes: ['cart-page'] });
@@ -49,7 +54,13 @@ export class Cart {
       text: 'Order',
       parent: order,
     });
-    document.body.append(cartPage);
+    const footer = document.querySelector('footer') as HTMLElement;
+    if (!footer) {
+      document.body.append(cartPage);
+    } else {
+      footer.before(cartPage);
+    }
+    // document.body.append(cartPage);
 
     this.drawCartList();
   }
