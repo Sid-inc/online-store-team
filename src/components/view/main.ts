@@ -48,24 +48,33 @@ export class Main {
     });
     const shortView = createNode({
       tag: 'button',
-      classes: ['view-button', 'view-buttons-active'],
-      text: 'short view',
+      classes: [
+        'view-buttons__item',
+        'view-buttons__item--cards',
+        'view-buttons__item--active',
+        'button',
+        'button--small',
+      ],
       parent: viewButtons,
     });
-    const fullView = createNode({ tag: 'button', classes: ['view-button'], text: 'full view', parent: viewButtons });
+    const fullView = createNode({
+      tag: 'button',
+      classes: ['view-buttons__item', 'view-buttons__item--list', 'button', 'button--small'],
+      parent: viewButtons,
+    });
     viewButtons.addEventListener('click', (e) => {
       if (e.target instanceof HTMLElement) {
         if (e.target === shortView) {
           if (this.catalogList) {
-            shortView.classList.add('view-buttons-active');
-            fullView.classList.remove('view-buttons-active');
-            this.catalogList.classList.add('product__list_short');
+            shortView.classList.add('view-buttons__item--active');
+            fullView.classList.remove('view-buttons__item--active');
+            this.catalogList.classList.add('product-list--grid');
           }
         } else {
           if (this.catalogList) {
-            shortView.classList.remove('view-buttons-active');
-            fullView.classList.add('view-buttons-active');
-            this.catalogList.classList.remove('product__list_short');
+            shortView.classList.remove('view-buttons__item--active');
+            fullView.classList.add('view-buttons__item--active');
+            this.catalogList.classList.remove('product-list--grid');
           }
         }
       }
@@ -152,7 +161,7 @@ export class Main {
     if (this.catalogList) {
       this.catalogList.remove();
     }
-    this.catalogList = createNode({ tag: 'ul', classes: ['catalog__list', 'product-list'] });
+    this.catalogList = createNode({ tag: 'ul', classes: ['catalog__list', 'product-list', 'product-list--grid'] });
     if (products.length !== 0) {
       products.forEach((product) => {
         const card = new Card(product);
