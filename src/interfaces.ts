@@ -39,6 +39,11 @@ export interface Queries {
   countMax?: string;
 }
 
+export interface CartQueries {
+  perPage?: string;
+  currentPage?: string;
+}
+
 export interface SettingsForPagination {
   perPage: number;
   perPageMin: number;

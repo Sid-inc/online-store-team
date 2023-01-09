@@ -15,6 +15,18 @@
   flex-shrink: 0;
 }
 
+.cart-page__empty {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-empty__text {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
 .cart-list__header {
   display: flex;
   align-items: center;
@@ -179,6 +191,7 @@
 .list-item__amount {
   font-style: italic;
   font-size: 11px;
+  white-space: nowrap;
   color: #999;
 }
 
@@ -199,6 +212,34 @@
   font-size: 20px;
 }
 
-.order__count {
-  font-size: 20px;
+.order__price-old {
+  text-decoration: line-through;
+  opacity: .5;
+}
+
+.order__promo {
+  width: 100%;
+}
+
+.order__field {
+  margin-bottom: 4px;
+}
+
+.order__text {
+  font-size: 13px;
+}
+
+.order__promo-available {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.order__promo-available--remove {
+  flex-direction: column;
+}
+
+.order__promo-title {
+  font-size: 14px;
+  padding-right: 4px;
 }
