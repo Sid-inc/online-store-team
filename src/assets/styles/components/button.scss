@@ -81,3 +81,17 @@
     transform: translate(-50%, -50%) rotate(-45deg);
   }
 }
+
+.button--link {
+  box-shadow: none;
+  padding: 0;
+  color: rgb(90, 101, 255);
+  text-decoration: underline;
+  transition: color .3s ease;
+
+  &:hover,
+  &:focus {
+    color: rgb(36, 50, 255);
+    background-color: transparent;
+  }
+}

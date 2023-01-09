@@ -29,4 +29,12 @@ export class BookStorage {
     if (!listItems) return;
     return JSON.parse(listItems) as CartItem[];
   }
+
+  update(item: CartItem) {
+    const currentList = this.getCurrentBooks() ?? [];
+    const updateIndex = currentList.findIndex((updateItem) => updateItem.id === item.id);
+    if (updateIndex === -1) return;
+    currentList[updateIndex].count = item.count;
+    localStorage.setItem(this.listKey, JSON.stringify(currentList));
+  }
 }
