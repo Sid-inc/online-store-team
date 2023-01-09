@@ -58,3 +58,19 @@
   background-color: #fff;
   box-shadow: 0 0 0 1px #999;
 }
+.cart__price {
+  position: absolute;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
+  display: block;
+  top: 7px;
+  right: 28px;
+  min-width: 96px;
+  padding: 5px;
+  text-align: center;
+  color: #000;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px #999;
+}

@@ -1,4 +1,5 @@
 import { ChangeHandler, CartItem } from '../../interfaces';
+import { drowInHeaderAmountBooksInCart, drowInHeaderPriceBooksInCart } from '../utils/amountBookInCart';
 import { createNode } from '../utils/createNode';
 
 export class ItemActions {
@@ -60,6 +61,8 @@ export class ItemActions {
       price.innerHTML = `$${newPrice.toFixed(2)}`;
       count.innerHTML = `${this.item.count}`;
       this.changeHandler('countChange', JSON.stringify(this.item));
+      drowInHeaderPriceBooksInCart();
+      drowInHeaderAmountBooksInCart();
     });
     lessBtn.addEventListener('click', () => {
       if (this.item.count <= 1) {
@@ -71,6 +74,8 @@ export class ItemActions {
         count.innerHTML = `${this.item.count}`;
         this.changeHandler('countChange', JSON.stringify(this.item));
       }
+      drowInHeaderAmountBooksInCart();
+      drowInHeaderPriceBooksInCart();
     });
     return itemActions;
   }

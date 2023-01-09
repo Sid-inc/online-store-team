@@ -6,6 +6,7 @@ import { PerPage } from './per-page-items';
 import { PageNav } from './page-nav';
 import { ItemActions } from './item-actions';
 import { cartParams, getCartParams } from '../utils/cartParams';
+import { drowInHeaderAmountBooksInCart, drowInHeaderPriceBooksInCart } from '../utils/amountBookInCart';
 
 export class Cart {
   private readonly promoCodes: string[] = ['rsschool', 'app'];
@@ -183,6 +184,8 @@ export class Cart {
         }
         this.drawCartList();
         this.updateFullPriceAndCount();
+        drowInHeaderAmountBooksInCart();
+        drowInHeaderPriceBooksInCart();
       });
     }
   }
