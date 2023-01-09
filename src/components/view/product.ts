@@ -85,14 +85,14 @@ export class Product {
       parent: singleProductContent,
     });
     const descHeader = createNode({ tag: 'div', classes: ['product-desc__header'], parent: desc });
-    const buttonAddToCart = createNode({
+    createNode({
       tag: 'button',
       classes: ['product-desc__action', 'button'],
       atributesAndValues: [['type', 'button']],
       text: 'Add to cart',
       parent: descHeader,
     });
-    const buttonBuyNow = createNode({
+    createNode({
       tag: 'button',
       classes: ['product-desc__action', 'button', 'button--primary'],
       atributesAndValues: [['type', 'button']],

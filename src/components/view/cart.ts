@@ -27,7 +27,12 @@ export class Cart {
     const cartListItems = this.storage.getCurrentBooks();
     if (!cartListItems || !cartListItems.length) {
       this.drawEmptyCart();
-      document.body.append(this.cartPage);
+      const footer = document.querySelector('footer') as HTMLElement;
+      if (!footer) {
+        document.body.append(this.cartPage);
+      } else {
+        footer.before(this.cartPage);
+      }
       return;
     }
     getCartParams();

@@ -70,7 +70,6 @@ export class Main {
         }
       }
     });
-    // return this.searhAndSortContainer;
   }
 
   drawCatalog(products: Book[]) {
@@ -172,8 +171,4 @@ export class Main {
     }
     return this.catalogList;
   }
-  // draw(products: Book[]) {
-  //   this.main.append(this.drawCatalog(products));
-  //   return this.main;
-  // }
 }
