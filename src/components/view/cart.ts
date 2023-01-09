@@ -114,8 +114,6 @@ export class Cart {
     } else {
       footer.before(this.cartPage);
     }
-    // document.body.append(cartPage);
-
     this.drawCartList();
     this.updateFullPriceAndCount();
   }

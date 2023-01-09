@@ -4,8 +4,6 @@ import { BookStorage } from './storage';
 export function сountBooksInCart() {
   const storage = new BookStorage();
   const bookArr = storage.getCurrentBooks();
-  console.log(bookArr);
-  // const count =
   if (bookArr) {
     const count: number = bookArr.reduce((acc: number, cur: CartItem) => {
       return acc + cur.count;

@@ -37,10 +37,7 @@ export class Main {
     const search = new Search(this.changeHandler);
     const sort = new Sort(this.changeHandler, settingsForSort);
     this.searhAndSortContainer.append(search.drow(), sort.drow());
-    const input = document.querySelector('.search__field');
-    if (input instanceof HTMLInputElement) {
-      input.setSelectionRange(input.value.length, input.value.length);
-    }
+
     const viewButtons = createNode({
       tag: 'div',
       classes: ['view-buttons'],
