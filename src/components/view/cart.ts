@@ -6,6 +6,7 @@ import { PerPage } from './per-page-items';
 import { PageNav } from './page-nav';
 import { ItemActions } from './item-actions';
 import { cartParams, getCartParams } from '../utils/cartParams';
+import { drowInHeaderAmountBooksInCart, drowInHeaderPriceBooksInCart } from '../utils/amountBookInCart';
 import { OrderModal } from './order-modal';
 
 export class Cart {
@@ -28,7 +29,12 @@ export class Cart {
     const cartListItems = this.storage.getCurrentBooks();
     if (!cartListItems || !cartListItems.length) {
       this.drawEmptyCart();
-      document.body.append(this.cartPage);
+      const footer = document.querySelector('footer') as HTMLElement;
+      if (!footer) {
+        document.body.append(this.cartPage);
+      } else {
+        footer.before(this.cartPage);
+      }
       return;
     }
     getCartParams();
@@ -108,8 +114,6 @@ export class Cart {
     } else {
       footer.before(this.cartPage);
     }
-    // document.body.append(cartPage);
-
     this.drawCartList();
     this.updateFullPriceAndCount();
   }
@@ -184,6 +188,8 @@ export class Cart {
         }
         this.drawCartList();
         this.updateFullPriceAndCount();
+        drowInHeaderAmountBooksInCart();
+        drowInHeaderPriceBooksInCart();
       });
     }
   }

@@ -4,6 +4,7 @@ import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAn
 import { cleanSearchParams, searchParams, getSearchParams } from '../utils/searchParams';
 import { getBooks } from '../utils/sortingAndFiltering';
 import { Cart } from './cart';
+import { ErrorPage } from './error-page';
 import { Footer } from './footer';
 import { Header } from './header';
 import { Main } from './main';
@@ -58,8 +59,6 @@ export class View {
       case 'addauthor':
         if (!settingsForSort.author.includes(value)) {
           settingsForSort.author.push(value);
-          console.log('добавилось значение' + `    settingsForSort.author - ${settingsForSort.author}`);
-
           searchParams();
         } else {
           const index: number = settingsForSort.author.indexOf(value);
@@ -111,7 +110,7 @@ export class View {
     if (currentPage) {
       currentPage.remove();
     }
-    let page: Main | Cart | Product | null = null;
+    let page: Main | Cart | Product | ErrorPage | null = null;
     if (idPage === '') {
       page = this.main;
       const booksForDrow = getBooks(books, settingsForSort);
@@ -122,6 +121,14 @@ export class View {
       page.draw();
     } else if (idPage === `book${idPage.slice(4)}`) {
       page = new Product(books);
+      const footer = document.querySelector('footer') as HTMLElement;
+      if (!footer) {
+        document.body.append(page.draw());
+      } else {
+        footer.before(page.draw());
+      }
+    } else {
+      page = new ErrorPage();
       const footer = document.querySelector('footer') as HTMLElement;
       if (!footer) {
         document.body.append(page.draw());
