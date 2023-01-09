@@ -6,6 +6,7 @@ import { PerPage } from './per-page-items';
 import { PageNav } from './page-nav';
 import { ItemActions } from './item-actions';
 import { cartParams, getCartParams } from '../utils/cartParams';
+import { OrderModal } from './order-modal';
 
 export class Cart {
   private readonly promoCodes: string[] = ['rsschool', 'app'];
@@ -63,12 +64,17 @@ export class Cart {
       parent: orderPromo,
     });
     createNode({ tag: 'span', classes: ['order__text'], text: 'Test: rsschool, app', parent: orderPromo });
-    createNode({
+    const orderBtn = createNode({
       tag: 'button',
       classes: ['order__action', 'button', 'button--primary'],
       atributesAndValues: [['type', 'button']],
       text: 'Order',
       parent: order,
+    });
+
+    orderBtn.addEventListener('click', () => {
+      const modal = new OrderModal();
+      modal.draw();
     });
 
     promoField.addEventListener('input', () => {
