@@ -64,7 +64,7 @@ export const books: Book[] = [
     price: 36.25,
     urlToImages: [
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81cp-sm9FzS.jpg',
-      'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81FX-yUxY8S.jpg',
+      'https://m.media-amazon.com/images/I/81qcRZzW-xS.jpg',
       'https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/81FX-yUxY8S.jpg',
     ],
     rating: 4.4,
@@ -159,7 +159,7 @@ export const books: Book[] = [
     ],
     rating: 4.4,
     isBestSeller: true,
-    cover: Cover.HARDCOVER,
+    cover: Cover.PAPERBACK,
     description:
       "Every Man Desires to Live Long, But No Man Wishes to Be Old.?Shipwrecked on his first voyage, he wakes up in Lilliput'a kingdom of tiny people who are one-twelfth the height of human beings.. Blown off course by the gales on his second, he is sold to the queen by a giant farmer in Brobdingnag.. Attacked by pirates on his third, marooned near a desolate island, he discovers Laputa?the flying island with educated but impractical people..And as a captain of a merchantman on his fourth voyage, abandoned on a landing boat by his crew, he meets Houyhnhnms?a race of talking horses who are the rulers and Yahoos?the deformed creatures who are human beings in their base form. Meet Lemuel Gulliver, as he describes his adventurous voyages across the islands he lands upon.A universally-read satirical fantasy, Jonathan Swift's Gulliver's Travels continues to remain a classic of English literature even more than two and a half centuries after it was first published.",
     amount: 49,

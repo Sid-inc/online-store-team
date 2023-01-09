@@ -16,6 +16,11 @@ export class Cart {
   private cartList?: CartItem[];
   private fullPrice?: HTMLElement;
   private fullCount?: HTMLElement;
+  id: string;
+
+  constructor(id: string) {
+    this.id = id;
+  }
 
   draw(): void {
     this.cartPage = createNode({ tag: 'main', classes: ['cart-page'] });
@@ -65,7 +70,6 @@ export class Cart {
       text: 'Order',
       parent: order,
     });
-    document.body.append(this.cartPage);
 
     promoField.addEventListener('input', () => {
       const value = (promoField as HTMLInputElement).value;
@@ -92,6 +96,13 @@ export class Cart {
         });
       }
     });
+    const footer = document.querySelector('footer') as HTMLElement;
+    if (!footer) {
+      document.body.append(this.cartPage);
+    } else {
+      footer.before(this.cartPage);
+    }
+    // document.body.append(cartPage);
 
     this.drawCartList();
     this.updateFullPriceAndCount();
