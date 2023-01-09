@@ -1,0 +1,29 @@
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.error-page__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-page__title {
+  font-size: 104px;
+  line-height: 108px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.error-page__text {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.error-page__link {
+  outline-offset: 2px;
+  font-weight: 600;
+}
