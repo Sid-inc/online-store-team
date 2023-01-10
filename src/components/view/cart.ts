@@ -135,7 +135,7 @@ export class Cart {
       }
     }
 
-    for (const [index, item] of pagingList[settingsForPagination.currentPage - 1].entries()) {
+    for (const item of pagingList[settingsForPagination.currentPage - 1]) {
       const book: Book | undefined = books.find((booksItem) => item.id === booksItem.id);
       if (!book) return;
       const listItem = createNode({
@@ -146,7 +146,7 @@ export class Cart {
       createNode({
         tag: 'span',
         classes: ['list-item__counter'],
-        text: `${index + 1}`,
+        text: `${this.cartList.indexOf(item) + 1}`,
         parent: listItem,
       });
       const itemInner = createNode({ tag: 'div', classes: ['list-item__inner'], parent: listItem });

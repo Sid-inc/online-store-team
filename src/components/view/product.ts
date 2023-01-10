@@ -116,12 +116,16 @@ export class Product {
       drowInHeaderAmountBooksInCart();
       drowInHeaderPriceBooksInCart();
     });
-    createNode({
+    const buttonByNow = createNode({
       tag: 'button',
       classes: ['product-desc__action', 'button', 'button--primary'],
       atributesAndValues: [['type', 'button']],
       text: 'Buy now',
       parent: descHeader,
+    });
+    buttonByNow.addEventListener('click', () => {
+      this.storage.addBook(this.product);
+      window.location.href = '/#cart';
     });
     const descInner = createNode({ tag: 'div', classes: ['product-desc__inner'], parent: desc });
     createNode({ tag: 'h2', classes: ['product-desc__title'], text: this.product.title, parent: descInner });
