@@ -1,4 +1,3 @@
-// import { Queries } from '../../interfaces';
 import { books, settingsForSort } from '../constants/constants';
 import { maxAmount, maxPrice, minAmount, minPrice } from './minMaxPriceAndAmount';
 
