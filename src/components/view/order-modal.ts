@@ -1,6 +1,9 @@
 import { createNode } from '../utils/createNode';
+import { BookStorage } from '../utils/storage';
 
 export class OrderModal {
+  private storage = new BookStorage();
+
   draw(): void {
     const modal = createNode({ tag: 'section', classes: ['modal'] });
     const modalInner = createNode({ tag: 'div', classes: ['modal__inner'], parent: modal });
@@ -64,11 +67,11 @@ export class OrderModal {
     });
     createNode({ tag: 'legend', classes: ['form-group__title'], text: 'Payments information', parent: formPay });
     const formPayInner = createNode({ tag: 'div', classes: ['form-group__inner'], parent: formPay });
-    createNode({
+    const payImage = createNode({
       tag: 'img',
       classes: ['form-group__image'],
       atributesAndValues: [
-        ['src', 'assets/images/visa.svg'],
+        ['src', 'assets/images/paysystem.webp'],
         ['alt', 'Pay system image'],
         ['width', '40'],
         ['height', '20'],
@@ -81,7 +84,7 @@ export class OrderModal {
       text: 'Card number',
       parent: formPayInner,
     });
-    createNode({
+    const cartNumberField = createNode({
       tag: 'input',
       classes: ['form-group__field', 'field'],
       atributesAndValues: [
@@ -98,7 +101,7 @@ export class OrderModal {
       text: 'Expiry date',
       parent: formPayBottom,
     });
-    createNode({
+    const cardDateField = createNode({
       tag: 'input',
       classes: ['form-group__field', 'field'],
       atributesAndValues: [
@@ -114,7 +117,7 @@ export class OrderModal {
       text: 'CVV',
       parent: formPayBottom,
     });
-    createNode({
+    const cartCvvField = createNode({
       tag: 'input',
       classes: ['form-group__field', 'field'],
       atributesAndValues: [
@@ -136,91 +139,175 @@ export class OrderModal {
       modal.remove();
     });
 
-    submitBtn.addEventListener('click', () => {
-      nameField.classList.remove('field--error');
-      const errorNameMsg = nameField.nextSibling;
-      if (errorNameMsg instanceof HTMLElement && errorNameMsg.classList.contains('field-group__error'))
-        errorNameMsg.remove();
-      const name = (nameField as HTMLInputElement).value.trim();
-      const valueWords = name.split(' ');
-      if (valueWords.length < 2) {
-        nameField.classList.add('field--error');
-        nameField.after(
-          createNode({ tag: 'span', classes: ['field-group__error'], text: 'Name has less than 2 words' })
-        );
-        return;
+    cartNumberField.addEventListener('input', () => {
+      const value = (cartNumberField as HTMLInputElement).value;
+      if (value[0] === '4') {
+        payImage.setAttribute('src', 'assets/images/visa.svg');
       }
-      for (const word of valueWords) {
-        if (word.length < 3) {
-          nameField.classList.add('field--error');
-          nameField.after(
-            createNode({ tag: 'span', classes: ['field-group__error'], text: 'To short name or surname' })
-          );
-          return;
-        }
+      if (value[0] === '5') {
+        payImage.setAttribute('src', 'assets/images/mastercard.svg');
       }
-
-      phoneField.classList.remove('field--error');
-      const errorPhoneMsg = phoneField.nextSibling;
-      if (errorPhoneMsg instanceof HTMLElement && errorPhoneMsg.classList.contains('field-group__error'))
-        errorPhoneMsg.remove();
-      const phone = (phoneField as HTMLInputElement).value.trim();
-      if (phone.length < 9) {
-        phoneField.classList.add('field--error');
-        phoneField.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'To short phone number' }));
-        return;
-      }
-      if (phone[0] !== '+') {
-        phoneField.classList.add('field--error');
-        phoneField.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Number must start by +' }));
-        return;
-      }
-
-      for (let i = 1; i < phone.length; i++) {
-        if (typeof +phone[i] !== 'number' && isNaN(+phone[i])) {
-          phoneField.classList.add('field--error');
-          phoneField.after(
-            createNode({ tag: 'span', classes: ['field-group__error'], text: 'Number must only digits' })
-          );
-          return;
-        }
-      }
-
-      addressField.classList.remove('field--error');
-      const errorAddresslMsg = addressField.nextSibling;
-      if (errorAddresslMsg instanceof HTMLElement && errorAddresslMsg.classList.contains('field-group__error'))
-        errorAddresslMsg.remove();
-      const address = (addressField as HTMLInputElement).value.trim();
-      const addressWords = address.split(' ');
-      if (addressWords.length < 3) {
-        addressField.classList.add('field--error');
-        addressField.after(
-          createNode({ tag: 'span', classes: ['field-group__error'], text: 'Address less than 3 words' })
-        );
-        return;
-      }
-      for (const word of addressWords) {
-        if (word.length < 5) {
-          addressField.classList.add('field--error');
-          addressField.after(
-            createNode({ tag: 'span', classes: ['field-group__error'], text: 'To short address values' })
-          );
-          return;
-        }
-      }
-
-      emailField.classList.remove('field--error');
-      const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-      const errorEmaillMsg = emailField.nextSibling;
-      if (errorEmaillMsg instanceof HTMLElement && errorEmaillMsg.classList.contains('field-group__error'))
-        errorEmaillMsg.remove();
-      const email = (emailField as HTMLInputElement).value.trim();
-      if (!EMAIL_REGEXP.test(email)) {
-        emailField.classList.add('field--error');
-        emailField.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Incorrect email' }));
-        return;
+      if (value[0] === '2') {
+        payImage.setAttribute('src', 'assets/images/mir.svg');
       }
     });
+
+    cardDateField.addEventListener('input', () => {
+      const value = (cardDateField as HTMLInputElement).value;
+      if (value.length === 2) (cardDateField as HTMLInputElement).value += '/';
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const validName = this.validation(nameField as HTMLInputElement, 2, 3);
+      const validPhone = this.validation(phoneField as HTMLInputElement, undefined, undefined, 9, true, true);
+      const validAddress = this.validation(addressField as HTMLInputElement, 3, 5);
+      const validEmail = this.validationEmail(emailField as HTMLInputElement);
+      const validCardNumber = this.validationCard(cartNumberField as HTMLInputElement, 16);
+      const validCardCvvNumber = this.validationCard(cartCvvField as HTMLInputElement, 3);
+      const validcardDate = this.validationDate(cardDateField as HTMLInputElement);
+
+      if (
+        !validName ||
+        !validPhone ||
+        !validAddress ||
+        !validEmail ||
+        !validCardNumber ||
+        !validCardCvvNumber ||
+        !validcardDate
+      )
+        return;
+
+      submitBtn.after(createNode({ tag: 'span', text: 'Order confirmed' }));
+      setTimeout(() => {
+        this.storage.clean();
+        window.location.href = '/';
+      }, 2000);
+    });
     document.body.after(modal);
+  }
+
+  validation(
+    element: HTMLInputElement,
+    minWords?: number,
+    minWordLength?: number,
+    minLength?: number,
+    firstPlus?: boolean,
+    numbersOnly?: boolean
+  ): boolean {
+    element.classList.remove('field--error');
+    const errorMsg = element.nextSibling;
+    if (errorMsg instanceof HTMLElement && errorMsg.classList.contains('field-group__error')) errorMsg.remove();
+    if (minWords) {
+      const name = element.value.trim();
+      const valueWords = name.split(' ');
+      if (valueWords.length < minWords) {
+        element.classList.add('field--error');
+        element.after(
+          createNode({ tag: 'span', classes: ['field-group__error'], text: `Less than ${minWords} words` })
+        );
+        return false;
+      }
+    }
+    if (minWordLength) {
+      const words = element.value.trim();
+      const listWords = words.split(' ');
+      for (const word of listWords) {
+        if (word.length < minWordLength) {
+          element.classList.add('field--error');
+          element.after(
+            createNode({ tag: 'span', classes: ['field-group__error'], text: `Has words less ${minWordLength}` })
+          );
+          return false;
+        }
+      }
+    }
+    if (minLength) {
+      const value = element.value.trim();
+      if (value.length < minLength) {
+        element.classList.add('field--error');
+        element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: `Min length ${minLength}` }));
+        return false;
+      }
+    }
+    if (firstPlus) {
+      const value = element.value.trim();
+      if (value[0] !== '+') {
+        element.classList.add('field--error');
+        element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Number must start by +' }));
+        return false;
+      }
+    }
+    if (numbersOnly) {
+      const value = element.value.trim();
+      for (let i = 1; i < value.length; i++) {
+        if (!Number(value[i])) {
+          element.classList.add('field--error');
+          element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Must be only digits' }));
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  validationEmail(element: HTMLInputElement): boolean {
+    element.classList.remove('field--error');
+    const errorMsg = element.nextSibling;
+    if (errorMsg instanceof HTMLElement && errorMsg.classList.contains('field-group__error')) errorMsg.remove();
+    const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    const email = element.value.trim();
+    if (!EMAIL_REGEXP.test(email)) {
+      element.classList.add('field--error');
+      element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Incorrect email' }));
+      return false;
+    }
+    return true;
+  }
+
+  validationCard(element: HTMLInputElement, numberLimit: number): boolean {
+    element.classList.remove('field--error');
+    const errorMsg = element.nextSibling;
+    if (errorMsg instanceof HTMLElement && errorMsg.classList.contains('field-group__error')) errorMsg.remove();
+    const value = element.value.trim();
+    if (value.length !== numberLimit) {
+      element.classList.add('field--error');
+      element.after(
+        createNode({ tag: 'span', classes: ['field-group__error'], text: `Not equal ${numberLimit} numbers` })
+      );
+      return false;
+    }
+    for (let i = 0; i < value.length; i++) {
+      if (!Number(value[i])) {
+        element.classList.add('field--error');
+        element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Must be only digits' }));
+        return false;
+      }
+    }
+    return true;
+  }
+
+  validationDate(element: HTMLInputElement): boolean {
+    element.classList.remove('field--error');
+    const errorMsg = element.nextSibling;
+    if (errorMsg instanceof HTMLElement && errorMsg.classList.contains('field-group__error')) errorMsg.remove();
+    const value = element.value.trim();
+    if (value.length !== 5) {
+      element.classList.add('field--error');
+      element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: `Not 4 symbol` }));
+      return false;
+    }
+    for (let i = 0; i < value.length; i++) {
+      if (!Number(value[i]) && value[i] !== '/') {
+        element.classList.add('field--error');
+        element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Must be only digits' }));
+        return false;
+      }
+    }
+    if (+(value[0] + value[1]) > 12 || +(value[3] + value[4]) > 31) {
+      element.classList.add('field--error');
+      element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: `Incorrect date` }));
+      return false;
+    }
+    return true;
   }
 }
