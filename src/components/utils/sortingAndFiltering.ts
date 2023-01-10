@@ -1,4 +1,5 @@
 import { Book, SettingsForSort } from '../../interfaces';
+import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 
 function searchBooks(arr: Book[], setting: SettingsForSort) {
   const val: string = setting.search.toUpperCase();
@@ -54,12 +55,22 @@ function filterByAmount(arr: Book[], setting: SettingsForSort) {
   return arr.filter((book) => book.amount >= setting.countMin && book.amount <= setting.countMax);
 }
 
+function setminMaxPriceAndAmountInSlider(arr: Book[], settingsForSort: SettingsForSort) {
+  settingsForSort.priceMin = minPrice(arr);
+  settingsForSort.priceMax = maxPrice(arr);
+  settingsForSort.countMin = minAmount(arr);
+  settingsForSort.countMax = maxAmount(arr);
+}
+
 export function getBooks(arr: Book[], settingsForSort: SettingsForSort) {
+  setminMaxPriceAndAmountInSlider(arr, settingsForSort);
   let booksBySearch = searchBooks(arr, settingsForSort);
   getSortValue(booksBySearch, settingsForSort);
   booksBySearch = filterByAythor(booksBySearch, settingsForSort);
   booksBySearch = filterByCategories(booksBySearch, settingsForSort);
   booksBySearch = filterByPrice(booksBySearch, settingsForSort);
   booksBySearch = filterByAmount(booksBySearch, settingsForSort);
+  setminMaxPriceAndAmountInSlider(booksBySearch, settingsForSort);
+
   return booksBySearch;
 }
