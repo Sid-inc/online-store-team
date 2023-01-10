@@ -30,7 +30,7 @@ export class View {
     this.header.draw();
     this.promo.draw();
     getSearchParams();
-    this.renderNewPage('');
+    this.renderNewPage(window.location.hash.slice(1) || '');
     this.enableRouteChange();
     this.footer.draw();
   }
