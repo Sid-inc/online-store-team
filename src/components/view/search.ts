@@ -33,7 +33,7 @@ export class Search {
       searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
     }
     search.append(searchInput, searchButton);
-    searchInput.addEventListener('input', () => {
+    searchInput.addEventListener('change', () => {
       this.changeHandler('setSearchValue', searchInput.value);
     });
     searchButton.addEventListener('click', () => {
