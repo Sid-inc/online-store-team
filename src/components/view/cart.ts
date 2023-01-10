@@ -183,6 +183,8 @@ export class Cart {
         this.storage.removeBook(item.id);
         const cartListItems = this.storage.getCurrentBooks();
         if (!cartListItems || !cartListItems.length) {
+          drowInHeaderAmountBooksInCart();
+          drowInHeaderPriceBooksInCart();
           this.drawEmptyCart();
           return;
         }
