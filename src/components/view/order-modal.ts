@@ -180,7 +180,7 @@ export class OrderModal {
       submitBtn.after(createNode({ tag: 'span', text: 'Order confirmed' }));
       setTimeout(() => {
         this.storage.clean();
-        window.location.href = '/';
+        window.location.href = './';
       }, 2000);
     });
     document.body.after(modal);
