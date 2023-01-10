@@ -125,7 +125,7 @@ export class Product {
     });
     buttonByNow.addEventListener('click', () => {
       this.storage.addBook(this.product);
-      window.location.href = '/#cart';
+      window.location.href = './#cart';
     });
     const descInner = createNode({ tag: 'div', classes: ['product-desc__inner'], parent: desc });
     createNode({ tag: 'h2', classes: ['product-desc__title'], text: this.product.title, parent: descInner });
