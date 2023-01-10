@@ -1,3 +1,4 @@
+import { priceBooksInCart, сountBooksInCart } from '../utils/amountBookInCart';
 import { createNode } from '../utils/createNode';
 
 export class Header {
@@ -25,8 +26,9 @@ export class Header {
       ],
       parent: headerContainer,
     });
-    const cartCounter = createNode({ tag: 'span', classes: ['cart__counter'], text: '0' });
-    headerCart.append(cartCounter);
+    const cartCounter = createNode({ tag: 'span', classes: ['cart__counter'], text: сountBooksInCart() });
+    const cartPrices = createNode({ tag: 'span', classes: ['cart__price'], text: `Total: $${priceBooksInCart()}` });
+    headerCart.append(cartCounter, cartPrices);
     document.body.append(header);
   }
 }

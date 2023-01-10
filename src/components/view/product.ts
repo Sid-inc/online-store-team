@@ -1,7 +1,11 @@
 import { Book } from '../../interfaces';
+import { drowInHeaderAmountBooksInCart, drowInHeaderPriceBooksInCart } from '../utils/amountBookInCart';
+import { CheckBookInCart } from '../utils/CheckBookInCart';
 import { createNode } from '../utils/createNode';
+import { BookStorage } from '../utils/storage';
 
 export class Product {
+  storage: BookStorage = new BookStorage();
   id: number;
   product: Book;
 
@@ -92,7 +96,27 @@ export class Product {
       text: 'Add to cart',
       parent: descHeader,
     });
-    const buttonBuyNow = createNode({
+    if (CheckBookInCart(this.product)) {
+      buttonAddToCart.innerText = 'In the cart';
+    }
+    buttonAddToCart.addEventListener('click', () => {
+      const booksInCart = this.storage.getCurrentBooks();
+      if (!booksInCart) {
+        this.storage.addBook(this.product);
+        buttonAddToCart.innerHTML = 'In the cart';
+      } else if (Array.isArray(booksInCart)) {
+        if (booksInCart.findIndex((el) => el.id === this.product.id) === -1) {
+          this.storage.addBook(this.product);
+          buttonAddToCart.innerHTML = 'In the cart';
+        } else {
+          this.storage.removeBook(this.product.id);
+          buttonAddToCart.innerHTML = 'Add to cart';
+        }
+      }
+      drowInHeaderAmountBooksInCart();
+      drowInHeaderPriceBooksInCart();
+    });
+    createNode({
       tag: 'button',
       classes: ['product-desc__action', 'button', 'button--primary'],
       atributesAndValues: [['type', 'button']],

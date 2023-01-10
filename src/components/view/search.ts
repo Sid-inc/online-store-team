@@ -27,8 +27,10 @@ export class Search {
         ['aria-label', 'clean'],
       ],
     });
+
     if (searchInput instanceof HTMLInputElement) {
       searchInput.focus();
+      searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
     }
     search.append(searchInput, searchButton);
     searchInput.addEventListener('input', () => {

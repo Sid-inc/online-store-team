@@ -37,4 +37,8 @@ export class BookStorage {
     currentList[updateIndex].count = item.count;
     localStorage.setItem(this.listKey, JSON.stringify(currentList));
   }
+
+  clean() {
+    localStorage.removeItem(this.listKey);
+  }
 }
