@@ -45,29 +45,37 @@ export function getSearchParams() {
   const url: URL = new URL(window.location.href);
   if (url.search) {
     for (const [name, value] of url.searchParams) {
-      if (name === 'search') {
-        SETTINGS_FOR_SORT.search = value;
-      }
-      if (name === 'sort') {
-        SETTINGS_FOR_SORT.sort = value;
-      }
-      if (name === 'category') {
-        value.split(',').forEach((el) => SETTINGS_FOR_SORT.category.push(el));
-      }
-      if (name === 'author') {
-        value.split(',').forEach((el) => SETTINGS_FOR_SORT.author.push(el));
-      }
-      if (name === 'priceMin') {
-        SETTINGS_FOR_SORT.priceMin = +value;
-      }
-      if (name === 'priceMax') {
-        SETTINGS_FOR_SORT.priceMax = +value;
-      }
-      if (name === 'countMin') {
-        SETTINGS_FOR_SORT.countMin = +value;
-      }
-      if (name === 'countMax') {
-        SETTINGS_FOR_SORT.countMax = +value;
+      switch (name) {
+        case 'search':
+          SETTINGS_FOR_SORT.search = value;
+          break;
+
+        case 'sort':
+          SETTINGS_FOR_SORT.sort = value;
+          break;
+
+        case 'category':
+          value.split(',').forEach((el) => SETTINGS_FOR_SORT.category.push(el));
+          break;
+
+        case 'author':
+          value.split(',').forEach((el) => SETTINGS_FOR_SORT.author.push(el));
+          break;
+
+        case 'priceMin':
+          SETTINGS_FOR_SORT.priceMin = +value;
+          break;
+
+        case 'priceMax':
+          SETTINGS_FOR_SORT.priceMax = +value;
+          break;
+        case 'countMin':
+          SETTINGS_FOR_SORT.countMin = +value;
+          break;
+
+        case 'countMax':
+          SETTINGS_FOR_SORT.countMax = +value;
+          break;
       }
     }
   }
