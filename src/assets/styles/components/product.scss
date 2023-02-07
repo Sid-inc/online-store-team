@@ -40,13 +40,20 @@
   }
 }
 
-.bread-crumbs__text {
+.bread-crumbs__text,
+.bread-crumbs__link {
   @include line-clamp(
     $font-size: 13px,
     $line-height: 16px,
     $lines-to-show: 1
   );
   width: 100%;
+}
+
+.bread-crumbs__link {
+  font-size: 13px;
+  line-height: 16px;
+  color: #000;
 }
 
 .single-product__content {

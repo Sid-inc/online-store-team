@@ -26,8 +26,16 @@ export class Product {
       classes: ['single-product__bread-crumbs', 'bread-crumbs'],
       parent: singleProductHeader,
     });
+    const li = createNode({ tag: 'li', classes: ['bread-crumbs__item'] });
+    createNode({
+      tag: 'a',
+      text: 'Catalog',
+      classes: ['bread-crumbs__link'],
+      atributesAndValues: [['href', './index.html']],
+      parent: li,
+    });
     ol.append(
-      this.drawLi('Catalog'),
+      li,
       this.drawLi(this.product.cover),
       this.drawLi(this.product.category),
       this.drawLi(this.product.author),

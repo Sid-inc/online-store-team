@@ -34,7 +34,7 @@ export class OrderModal {
       tag: 'input',
       classes: ['form-group__field', 'field'],
       atributesAndValues: [
-        ['type', 'text'],
+        ['type', 'tel'],
         ['placeholder', 'Phone'],
         ['required', ''],
       ],
@@ -139,6 +139,11 @@ export class OrderModal {
       modal.remove();
     });
 
+    phoneField.addEventListener('input', () => {
+      const value = (phoneField as HTMLInputElement).value.replace(/[^\d\+]/g, '');
+      (phoneField as HTMLInputElement).value = value;
+    });
+
     cartNumberField.addEventListener('input', () => {
       const value = (cartNumberField as HTMLInputElement).value;
       if (value[0] === '4') {
@@ -153,8 +158,12 @@ export class OrderModal {
     });
 
     cardDateField.addEventListener('input', () => {
-      const value = (cardDateField as HTMLInputElement).value;
-      if (value.length === 2) (cardDateField as HTMLInputElement).value += '/';
+      const value = (cardDateField as HTMLInputElement).value.replace(/[^\d\/]/g, '');
+      (cardDateField as HTMLInputElement).value = value;
+      if (value.length > 5) {
+        (cardDateField as HTMLInputElement).value = value.slice(0, 5);
+      }
+      if (value.length === 2 && value[2] !== '/') (cardDateField as HTMLInputElement).value += '/';
     });
 
     submitBtn.addEventListener('click', () => {
@@ -277,7 +286,7 @@ export class OrderModal {
       return false;
     }
     for (let i = 0; i < value.length; i++) {
-      if (!Number(value[i])) {
+      if (!Number(value[i]) && value[i] !== '0') {
         element.classList.add('field--error');
         element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Must be only digits' }));
         return false;
@@ -297,13 +306,13 @@ export class OrderModal {
       return false;
     }
     for (let i = 0; i < value.length; i++) {
-      if (!Number(value[i]) && value[i] !== '/') {
+      if (!Number(value[i]) && value[i] !== '/' && value[i] !== '0') {
         element.classList.add('field--error');
         element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: 'Must be only digits' }));
         return false;
       }
     }
-    if (+(value[0] + value[1]) > 12 || +(value[3] + value[4]) > 31) {
+    if (+(value[0] + value[1]) > 12) {
       element.classList.add('field--error');
       element.after(createNode({ tag: 'span', classes: ['field-group__error'], text: `Incorrect date` }));
       return false;
