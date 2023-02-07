@@ -1,4 +1,4 @@
-import { settingsForPagination } from './../constants/constants';
+import { SETTINGS_FOR_PAGINATION } from './../constants/constants';
 import { ChangeHandler } from '../../interfaces';
 import { createNode } from '../utils/createNode';
 
@@ -14,17 +14,17 @@ export class PerPage {
       classes: ['list-actions__limit', 'field'],
       atributesAndValues: [
         ['type', 'number'],
-        ['min', `${settingsForPagination.perPageMin}`],
-        ['max', `${settingsForPagination.perPageMax}`],
-        ['value', `${settingsForPagination.perPage}`],
+        ['min', `${SETTINGS_FOR_PAGINATION.perPageMin}`],
+        ['max', `${SETTINGS_FOR_PAGINATION.perPageMax}`],
+        ['value', `${SETTINGS_FOR_PAGINATION.perPage}`],
       ],
     }) as HTMLInputElement;
     perPageInput.addEventListener('input', () => {
-      if (+perPageInput.value > settingsForPagination.perPageMax) {
-        perPageInput.value = `${settingsForPagination.perPageMax}`;
+      if (+perPageInput.value > SETTINGS_FOR_PAGINATION.perPageMax) {
+        perPageInput.value = `${SETTINGS_FOR_PAGINATION.perPageMax}`;
       }
-      if (+perPageInput.value < settingsForPagination.perPageMin) {
-        perPageInput.value = `${settingsForPagination.perPageMin}`;
+      if (+perPageInput.value < SETTINGS_FOR_PAGINATION.perPageMin) {
+        perPageInput.value = `${SETTINGS_FOR_PAGINATION.perPageMin}`;
       }
       this.changeHandler('changePerPage', perPageInput.value);
     });

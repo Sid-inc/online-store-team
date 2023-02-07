@@ -3,7 +3,7 @@ import 'nouislider/dist/nouislider.css';
 import { Book, MaxAndMin, SettingsForSort } from '../../interfaces';
 import { createNode } from '../utils/createNode';
 import { ChangeHandler } from '../../interfaces';
-import { settingsForSort } from '../constants/constants';
+import { SETTINGS_FOR_SORT } from '../constants/constants';
 
 export class Slider {
   max: MaxAndMin;
@@ -38,7 +38,7 @@ export class Slider {
     const slider = createNode({ tag: 'div', classes: ['slider-container'] });
 
     noUiSlider.create(slider, {
-      start: [settingsForSort[this.key1], settingsForSort[this.key2]],
+      start: [SETTINGS_FOR_SORT[this.key1], SETTINGS_FOR_SORT[this.key2]],
       step: this.step,
       connect: true,
       range: {

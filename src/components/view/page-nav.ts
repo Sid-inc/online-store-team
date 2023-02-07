@@ -1,4 +1,4 @@
-import { settingsForPagination } from './../constants/constants';
+import { SETTINGS_FOR_PAGINATION } from './../constants/constants';
 import { ChangeHandler } from '../../interfaces';
 import { createNode } from '../utils/createNode';
 
@@ -22,7 +22,7 @@ export class PageNav {
     const pageCounter = createNode({
       tag: 'span',
       classes: ['pages__count'],
-      text: `${settingsForPagination.currentPage}`,
+      text: `${SETTINGS_FOR_PAGINATION.currentPage}`,
       parent: cartPages,
     });
     const nextBtn = createNode({
@@ -36,14 +36,14 @@ export class PageNav {
     });
 
     prevBtn.addEventListener('click', () => {
-      if (settingsForPagination.currentPage <= 1) return;
-      const newPage = settingsForPagination.currentPage - 1;
+      if (SETTINGS_FOR_PAGINATION.currentPage <= 1) return;
+      const newPage = SETTINGS_FOR_PAGINATION.currentPage - 1;
       pageCounter.textContent = `${newPage}`;
       this.changeHandler('changeCurrentPage', `${newPage}`);
     });
     nextBtn.addEventListener('click', () => {
-      if (settingsForPagination.currentPage >= settingsForPagination.pagesCount) return;
-      const newPage = settingsForPagination.currentPage + 1;
+      if (SETTINGS_FOR_PAGINATION.currentPage >= SETTINGS_FOR_PAGINATION.pagesCount) return;
+      const newPage = SETTINGS_FOR_PAGINATION.currentPage + 1;
       pageCounter.textContent = `${newPage}`;
       this.changeHandler('changeCurrentPage', `${newPage}`);
     });

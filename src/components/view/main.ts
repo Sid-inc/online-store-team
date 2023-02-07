@@ -1,5 +1,5 @@
 import { Book, ChangeHandler } from '../../interfaces';
-import { books, settingsForSort } from '../constants/constants';
+import { BOOKS_ON_SALE, SETTINGS_FOR_SORT } from '../constants/constants';
 import { copyLink } from '../utils/copyLink';
 import { createNode } from '../utils/createNode';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
@@ -21,8 +21,8 @@ export class Main {
 
   constructor(changeHandler: ChangeHandler) {
     this.changeHandler = changeHandler;
-    this.filterListByCategories = new FilterList(books, 'category', changeHandler, settingsForSort);
-    this.filterListByAuthors = new FilterList(books, 'author', changeHandler, settingsForSort);
+    this.filterListByCategories = new FilterList(BOOKS_ON_SALE, 'category', changeHandler, SETTINGS_FOR_SORT);
+    this.filterListByAuthors = new FilterList(BOOKS_ON_SALE, 'author', changeHandler, SETTINGS_FOR_SORT);
   }
 
   drawSearhAndSortContainer() {
@@ -35,7 +35,7 @@ export class Main {
       parent: this.main,
     });
     const search = new Search(this.changeHandler);
-    const sort = new Sort(this.changeHandler, settingsForSort);
+    const sort = new Sort(this.changeHandler, SETTINGS_FOR_SORT);
     this.searhAndSortContainer.append(search.drow(), sort.drow());
 
     const viewButtons = createNode({
@@ -99,7 +99,7 @@ export class Main {
     const searchText = createNode({
       tag: 'span',
       classes: ['search__text'],
-      text: `${getBooks(books, settingsForSort).length} books found`,
+      text: `${getBooks(BOOKS_ON_SALE, SETTINGS_FOR_SORT).length} books found`,
     });
     form.append(searchText, this.filterListByCategories.drow(), this.filterListByAuthors.drow());
 
@@ -109,7 +109,16 @@ export class Main {
       classes: ['range__title'],
       text: 'Price range',
     });
-    const rangePrice = new Slider(minPrice, maxPrice, books, 0.01, 'priceMin', 'priceMax', this.changeHandler, 'Price');
+    const rangePrice = new Slider(
+      minPrice,
+      maxPrice,
+      BOOKS_ON_SALE,
+      0.01,
+      'priceMin',
+      'priceMax',
+      this.changeHandler,
+      'Price'
+    );
     const rangeAmountTitle = createNode({
       tag: 'div',
       classes: ['range__title'],
@@ -118,7 +127,7 @@ export class Main {
     const rangeAmount = new Slider(
       minAmount,
       maxAmount,
-      books,
+      BOOKS_ON_SALE,
       1,
       'countMin',
       'countMax',

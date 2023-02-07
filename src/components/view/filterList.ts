@@ -3,7 +3,7 @@ import { createNode } from '../utils/createNode';
 import { countKeys } from '../utils/countDescription';
 import { toggleActiveClass } from '../utils/toggleActiveClass';
 import { getBooks } from '../utils/sortingAndFiltering';
-import { books, settingsForSort } from '../constants/constants';
+import { BOOKS_ON_SALE, SETTINGS_FOR_SORT } from '../constants/constants';
 
 export class FilterList {
   product: Book[];
@@ -53,7 +53,7 @@ export class FilterList {
       createNode({
         tag: 'span',
         classes: ['categories-item__count'],
-        text: `(${getBooks(books, settingsForSort).filter((book) => book[this.key] === category[0]).length}/${
+        text: `(${getBooks(BOOKS_ON_SALE, SETTINGS_FOR_SORT).filter((book) => book[this.key] === category[0]).length}/${
           category[1]
         })`,
         parent: button,
