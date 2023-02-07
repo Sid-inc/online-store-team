@@ -1,0 +1,189 @@
+import { Book, ChangeHandler } from '../../interfaces';
+import { BOOKS_ON_SALE, SETTINGS_FOR_SORT } from '../constants/constants';
+import { copyLink } from '../utils/copyLink';
+import { createNode } from '../utils/createNode';
+import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
+import { getBooks } from '../utils/sortingAndFiltering';
+import { Card } from './card';
+import { FilterList } from './filterList';
+import { Search } from './search';
+import { Slider } from './slider';
+import { Sort } from './sort';
+
+export class Main {
+  main = createNode({ tag: 'main', classes: ['catalog'], atributesAndValues: [['id', 'shop']] });
+  searhAndSortContainer: HTMLElement | null = null;
+  catalogList: HTMLElement | null = null;
+  catalogContainer: HTMLElement | null = null;
+  filterListByCategories: FilterList;
+  filterListByAuthors: FilterList;
+  changeHandler: ChangeHandler;
+
+  constructor(changeHandler: ChangeHandler) {
+    this.changeHandler = changeHandler;
+    this.filterListByCategories = new FilterList(BOOKS_ON_SALE, 'category', changeHandler, SETTINGS_FOR_SORT);
+    this.filterListByAuthors = new FilterList(BOOKS_ON_SALE, 'author', changeHandler, SETTINGS_FOR_SORT);
+  }
+
+  drawSearhAndSortContainer() {
+    if (this.searhAndSortContainer) {
+      this.searhAndSortContainer.remove();
+    }
+    this.searhAndSortContainer = createNode({
+      tag: 'div',
+      classes: ['catalog__inner', 'container'],
+      parent: this.main,
+    });
+    const search = new Search(this.changeHandler);
+    const sort = new Sort(this.changeHandler, SETTINGS_FOR_SORT);
+    this.searhAndSortContainer.append(search.drow(), sort.drow());
+
+    const viewButtons = createNode({
+      tag: 'div',
+      classes: ['view-buttons'],
+      parent: this.searhAndSortContainer,
+    });
+    const shortView = createNode({
+      tag: 'button',
+      classes: [
+        'view-buttons__item',
+        'view-buttons__item--cards',
+        'view-buttons__item--active',
+        'button',
+        'button--small',
+      ],
+      parent: viewButtons,
+    });
+    const fullView = createNode({
+      tag: 'button',
+      classes: ['view-buttons__item', 'view-buttons__item--list', 'button', 'button--small'],
+      parent: viewButtons,
+    });
+    viewButtons.addEventListener('click', (e) => {
+      if (e.target instanceof HTMLElement) {
+        if (e.target === shortView) {
+          if (this.catalogList) {
+            shortView.classList.add('view-buttons__item--active');
+            fullView.classList.remove('view-buttons__item--active');
+            this.catalogList.classList.add('product-list--grid');
+          }
+        } else {
+          if (this.catalogList) {
+            shortView.classList.remove('view-buttons__item--active');
+            fullView.classList.add('view-buttons__item--active');
+            this.catalogList.classList.remove('product-list--grid');
+          }
+        }
+      }
+    });
+  }
+
+  drawCatalog(products: Book[]) {
+    if (this.catalogContainer) {
+      this.catalogContainer.remove();
+    }
+    this.catalogContainer = createNode({ tag: 'div', classes: ['catalog__inner', 'container'], parent: this.main });
+    this.catalogContainer.append(this.drawCatalogFilters(), this.drawCatalogList(products));
+    const footer = document.querySelector('footer') as HTMLElement;
+    if (!footer) {
+      document.body.append(this.main);
+    } else {
+      footer.before(this.main);
+    }
+    return this.catalogContainer;
+  }
+
+  drawCatalogFilters() {
+    const catalogFilters = createNode({ tag: 'aside', classes: ['catalog__filters', 'filters'] });
+    const form = createNode({ tag: 'form', classes: ['filters__inner'], parent: catalogFilters });
+    const searchText = createNode({
+      tag: 'span',
+      classes: ['search__text'],
+      text: `${getBooks(BOOKS_ON_SALE, SETTINGS_FOR_SORT).length} books found`,
+    });
+    form.append(searchText, this.filterListByCategories.drow(), this.filterListByAuthors.drow());
+
+    const filtersRanges = createNode({ tag: 'fieldset', classes: ['filters__ranges'], parent: form });
+    const rangePriceTitle = createNode({
+      tag: 'div',
+      classes: ['range__title'],
+      text: 'Price range',
+    });
+    const rangePrice = new Slider(
+      minPrice,
+      maxPrice,
+      BOOKS_ON_SALE,
+      0.01,
+      'priceMin',
+      'priceMax',
+      this.changeHandler,
+      'Price'
+    );
+    const rangeAmountTitle = createNode({
+      tag: 'div',
+      classes: ['range__title'],
+      text: 'Amount in shop range',
+    });
+    const rangeAmount = new Slider(
+      minAmount,
+      maxAmount,
+      BOOKS_ON_SALE,
+      1,
+      'countMin',
+      'countMax',
+      this.changeHandler,
+      'Amount'
+    );
+
+    filtersRanges.append(rangePriceTitle, rangePrice.drawSlider(2), rangeAmountTitle, rangeAmount.drawSlider(0));
+
+    const filtersFooter = createNode({ tag: 'footer', classes: ['filters__footer'], parent: form });
+    const buttonClean = createNode({
+      tag: 'button',
+      classes: ['button', 'button--primary'],
+      text: 'Clean',
+      atributesAndValues: [['type', 'button']],
+      parent: filtersFooter,
+    });
+    const buttonCopy = createNode({
+      tag: 'button',
+      classes: ['button'],
+      text: 'Copy',
+      atributesAndValues: [['type', 'button']],
+      parent: filtersFooter,
+    });
+    buttonClean.addEventListener('click', () => {
+      this.changeHandler('cleanSettings', '');
+    });
+    buttonCopy.addEventListener('click', () => {
+      copyLink();
+      buttonCopy.innerText = 'Copied!';
+    });
+
+    return catalogFilters;
+  }
+
+  drawCatalogList(products: Book[]) {
+    if (this.catalogList) {
+      this.catalogList.remove();
+    }
+    this.catalogList = createNode({ tag: 'ul', classes: ['catalog__list', 'product-list', 'product-list--grid'] });
+    if (products.length !== 0) {
+      products.forEach((product) => {
+        const card = new Card(product);
+        if (this.catalogList) {
+          this.catalogList.append(card.getCardElement());
+        }
+      });
+    } else {
+      this.catalogList.classList.add('product__list_no-found');
+      createNode({
+        tag: 'span',
+        classes: ['catalog__list_text'],
+        text: 'No books found... <br> Please, change your search settings.',
+        parent: this.catalogList,
+      });
+    }
+    return this.catalogList;
+  }
+}
