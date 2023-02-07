@@ -1,19 +1,19 @@
 import { CartQueries } from '../../interfaces';
-import { settingsForPagination } from '../constants/constants';
+import { SETTINGS_FOR_PAGINATION } from '../constants/constants';
 
 export function cartParams() {
   const url: URL = new URL(window.location.href);
   const queries: CartQueries = {};
 
-  if (settingsForPagination.perPage !== 10) {
+  if (SETTINGS_FOR_PAGINATION.perPage !== 10) {
     url.searchParams.delete('perPage');
-    queries.perPage = `${settingsForPagination.perPage}`;
+    queries.perPage = `${SETTINGS_FOR_PAGINATION.perPage}`;
     url.searchParams.append('perPage', queries.perPage);
   }
 
-  if (settingsForPagination.currentPage !== 1) {
+  if (SETTINGS_FOR_PAGINATION.currentPage !== 1) {
     url.searchParams.delete('currentPage');
-    queries.currentPage = `${settingsForPagination.currentPage}`;
+    queries.currentPage = `${SETTINGS_FOR_PAGINATION.currentPage}`;
     url.searchParams.append('currentPage', queries.currentPage);
   }
 
@@ -25,10 +25,10 @@ export function getCartParams() {
   if (url.search) {
     for (const [name, value] of url.searchParams) {
       if (name === 'perPage') {
-        settingsForPagination.perPage = +value;
+        SETTINGS_FOR_PAGINATION.perPage = +value;
       }
       if (name === 'currentPage') {
-        settingsForPagination.currentPage = +value;
+        SETTINGS_FOR_PAGINATION.currentPage = +value;
       }
     }
   }

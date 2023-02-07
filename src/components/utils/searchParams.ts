@@ -1,38 +1,38 @@
-import { books, settingsForSort } from '../constants/constants';
+import { BOOKS_ON_SALE, SETTINGS_FOR_SORT } from '../constants/constants';
 import { maxAmount, maxPrice, minAmount, minPrice } from './minMaxPriceAndAmount';
 
 export function searchParams() {
   const url: URL = new URL(window.location.href);
 
   url.searchParams.delete('search');
-  if (settingsForSort.search !== '') {
-    url.searchParams.append('search', settingsForSort.search);
+  if (SETTINGS_FOR_SORT.search !== '') {
+    url.searchParams.append('search', SETTINGS_FOR_SORT.search);
   }
   url.searchParams.delete('category');
-  if (settingsForSort.category.length !== 0) {
-    url.searchParams.append('category', settingsForSort.category.join(','));
+  if (SETTINGS_FOR_SORT.category.length !== 0) {
+    url.searchParams.append('category', SETTINGS_FOR_SORT.category.join(','));
   }
   url.searchParams.delete('author');
-  if (settingsForSort.author.length !== 0) {
-    url.searchParams.append('author', settingsForSort.author.join(','));
+  if (SETTINGS_FOR_SORT.author.length !== 0) {
+    url.searchParams.append('author', SETTINGS_FOR_SORT.author.join(','));
   }
   url.searchParams.delete('sort');
-  url.searchParams.append('sort', settingsForSort.sort);
+  url.searchParams.append('sort', SETTINGS_FOR_SORT.sort);
   url.searchParams.delete('priceMin');
-  if (settingsForSort.priceMin !== minPrice(books)) {
-    url.searchParams.append('priceMin', settingsForSort.priceMin.toString());
+  if (SETTINGS_FOR_SORT.priceMin !== minPrice(BOOKS_ON_SALE)) {
+    url.searchParams.append('priceMin', SETTINGS_FOR_SORT.priceMin.toString());
   }
   url.searchParams.delete('priceMax');
-  if (settingsForSort.priceMax !== maxPrice(books)) {
-    url.searchParams.append('priceMax', settingsForSort.priceMax.toString());
+  if (SETTINGS_FOR_SORT.priceMax !== maxPrice(BOOKS_ON_SALE)) {
+    url.searchParams.append('priceMax', SETTINGS_FOR_SORT.priceMax.toString());
   }
   url.searchParams.delete('countMin');
-  if (settingsForSort.countMin !== minAmount(books)) {
-    url.searchParams.append('countMin', settingsForSort.countMin.toString());
+  if (SETTINGS_FOR_SORT.countMin !== minAmount(BOOKS_ON_SALE)) {
+    url.searchParams.append('countMin', SETTINGS_FOR_SORT.countMin.toString());
   }
   url.searchParams.delete('countMax');
-  if (settingsForSort.countMax !== maxAmount(books)) {
-    url.searchParams.append('priceMin', settingsForSort.countMax.toString());
+  if (SETTINGS_FOR_SORT.countMax !== maxAmount(BOOKS_ON_SALE)) {
+    url.searchParams.append('priceMin', SETTINGS_FOR_SORT.countMax.toString());
   }
   history.pushState(null, '', url);
 }
@@ -46,28 +46,28 @@ export function getSearchParams() {
   if (url.search) {
     for (const [name, value] of url.searchParams) {
       if (name === 'search') {
-        settingsForSort.search = value;
+        SETTINGS_FOR_SORT.search = value;
       }
       if (name === 'sort') {
-        settingsForSort.sort = value;
+        SETTINGS_FOR_SORT.sort = value;
       }
       if (name === 'category') {
-        value.split(',').forEach((el) => settingsForSort.category.push(el));
+        value.split(',').forEach((el) => SETTINGS_FOR_SORT.category.push(el));
       }
       if (name === 'author') {
-        value.split(',').forEach((el) => settingsForSort.author.push(el));
+        value.split(',').forEach((el) => SETTINGS_FOR_SORT.author.push(el));
       }
       if (name === 'priceMin') {
-        settingsForSort.priceMin = +value;
+        SETTINGS_FOR_SORT.priceMin = +value;
       }
       if (name === 'priceMax') {
-        settingsForSort.priceMax = +value;
+        SETTINGS_FOR_SORT.priceMax = +value;
       }
       if (name === 'countMin') {
-        settingsForSort.countMin = +value;
+        SETTINGS_FOR_SORT.countMin = +value;
       }
       if (name === 'countMax') {
-        settingsForSort.countMax = +value;
+        SETTINGS_FOR_SORT.countMax = +value;
       }
     }
   }

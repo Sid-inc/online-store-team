@@ -1,7 +1,7 @@
 import { Book, Cover, SettingsForPagination, SettingsForSort } from '../../interfaces';
 import { maxAmount, maxPrice, minAmount, minPrice } from '../utils/minMaxPriceAndAmount';
 
-export const books: Book[] = [
+export const BOOKS_ON_SALE: Book[] = [
   {
     category: 'classic',
     id: 1,
@@ -832,18 +832,18 @@ export const books: Book[] = [
   },
 ];
 
-export const settingsForSort: SettingsForSort = {
+export const SETTINGS_FOR_SORT: SettingsForSort = {
   search: '',
   sort: 'pasc',
   category: [],
   author: [],
-  priceMin: minPrice(books),
-  priceMax: maxPrice(books),
-  countMin: minAmount(books),
-  countMax: maxAmount(books),
+  priceMin: minPrice(BOOKS_ON_SALE),
+  priceMax: maxPrice(BOOKS_ON_SALE),
+  countMin: minAmount(BOOKS_ON_SALE),
+  countMax: maxAmount(BOOKS_ON_SALE),
 };
 
-export const settingsForPagination: SettingsForPagination = {
+export const SETTINGS_FOR_PAGINATION: SettingsForPagination = {
   perPage: 10,
   perPageMin: 1,
   perPageMax: 99,

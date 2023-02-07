@@ -1,5 +1,5 @@
 import { Book, CartItem, ChangeHandler } from '../../interfaces';
-import { books, settingsForPagination } from '../constants/constants';
+import { BOOKS_ON_SALE, SETTINGS_FOR_PAGINATION } from '../constants/constants';
 import { createNode } from '../utils/createNode';
 import { BookStorage } from '../utils/storage';
 import { PerPage } from './per-page-items';
@@ -126,17 +126,17 @@ export class Cart {
     if (!this.cartList.length) return;
     const pagingList = this.getPagingList();
 
-    if (settingsForPagination.currentPage > pagingList.length) {
-      settingsForPagination.currentPage = pagingList.length;
+    if (SETTINGS_FOR_PAGINATION.currentPage > pagingList.length) {
+      SETTINGS_FOR_PAGINATION.currentPage = pagingList.length;
       cartParams();
       const currentPage = document.querySelector('.pages__count');
       if (currentPage instanceof HTMLElement) {
-        currentPage.innerHTML = `${settingsForPagination.currentPage}`;
+        currentPage.innerHTML = `${SETTINGS_FOR_PAGINATION.currentPage}`;
       }
     }
 
-    for (const item of pagingList[settingsForPagination.currentPage - 1]) {
-      const book: Book | undefined = books.find((booksItem) => item.id === booksItem.id);
+    for (const item of pagingList[SETTINGS_FOR_PAGINATION.currentPage - 1]) {
+      const book: Book | undefined = BOOKS_ON_SALE.find((booksItem) => item.id === booksItem.id);
       if (!book) return;
       const listItem = createNode({
         tag: 'li',
@@ -198,12 +198,12 @@ export class Cart {
 
   changePageHandler: ChangeHandler = (action, value) => {
     if (action === 'changePerPage') {
-      settingsForPagination.perPage = +value;
+      SETTINGS_FOR_PAGINATION.perPage = +value;
       cartParams();
       this.drawCartList();
     }
     if (action === 'changeCurrentPage') {
-      settingsForPagination.currentPage = +value;
+      SETTINGS_FOR_PAGINATION.currentPage = +value;
       cartParams();
       this.drawCartList();
     }
@@ -227,11 +227,11 @@ export class Cart {
   getPagingList(): CartItem[][] {
     if (!this.cartList) return [];
     const res = [];
-    for (let i = 0; i < this.cartList.length; i += settingsForPagination.perPage) {
-      const chunk = this.cartList.slice(i, i + settingsForPagination.perPage);
+    for (let i = 0; i < this.cartList.length; i += SETTINGS_FOR_PAGINATION.perPage) {
+      const chunk = this.cartList.slice(i, i + SETTINGS_FOR_PAGINATION.perPage);
       res.push(chunk);
     }
-    settingsForPagination.pagesCount = res.length;
+    SETTINGS_FOR_PAGINATION.pagesCount = res.length;
     return res;
   }
 

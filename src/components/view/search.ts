@@ -1,5 +1,5 @@
 import { ChangeHandler } from '../../interfaces';
-import { settingsForSort } from '../constants/constants';
+import { SETTINGS_FOR_SORT } from '../constants/constants';
 import { createNode } from '../utils/createNode';
 
 export class Search {
@@ -16,7 +16,7 @@ export class Search {
       atributesAndValues: [
         ['type', 'text'],
         ['placeholder', 'Search'],
-        ['value', settingsForSort.search],
+        ['value', SETTINGS_FOR_SORT.search],
       ],
     }) as HTMLInputElement;
     const searchButton = createNode({

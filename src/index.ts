@@ -1,4 +1,3 @@
-// import App from './components/app/app';
 import { View } from './components/view/view';
 import './main.scss';
 
